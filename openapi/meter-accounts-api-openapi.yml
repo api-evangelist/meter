@@ -1,0 +1,311 @@
+openapi: 3.0.1
+info:
+  title: Meterest Accounts API
+  description: 'RESTful API to access Meter.io
+
+
+    [Project Home](https://github.com/meterio)
+
+    '
+  license:
+    name: LGPL 3.0
+    url: https://www.gnu.org/licenses/lgpl-3.0.en.html
+  version: 1.2.2
+servers:
+- url: /
+  description: local meter node
+tags:
+- name: Accounts
+  description: Access to account objects
+paths:
+  /accounts/{address}:
+    parameters:
+    - $ref: '#/components/parameters/AddressInPath'
+    - $ref: '#/components/parameters/RevisionInQuery'
+    get:
+      tags:
+      - Accounts
+      summary: Retrieve account detail
+      description: 'includes `balance`, `energy` and `hasCode`, by account `address`. An account with `hasCode` be *true* is a contract.
+
+
+        Historical account detail can be queried by specifying `revision` query string.
+
+        '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+    post:
+      tags:
+      - Accounts
+      summary: Execute account code
+      description: 'to simulate contract method call, without sending transaction to block chain.
+
+
+        It''s useful to estimate gas usage and execution result of a clause.
+
+        '
+      requestBody:
+        description: arguments and environment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallData'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallResult'
+  /accounts/*:
+    post:
+      parameters:
+      - $ref: '#/components/parameters/RevisionInQuery'
+      tags:
+      - Accounts
+      summary: Execute a batch of codes
+      description: 'to simulate execution of a transaction.
+
+        '
+      requestBody:
+        description: arguments and environment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchCallData'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCallResult'
+  /accounts:
+    post:
+      parameters:
+      - $ref: '#/components/parameters/RevisionInQuery'
+      tags:
+      - Accounts
+      summary: Execute bytecodes
+      description: "to simulate contract deployment without sending transaction to block chain.\n\nIt's useful to estimate gas usage and contract deployment result of a clause.\n\n### TIPS:\n  - `data` in request body is the bytecodes of a contract\n  - `data` in response body is the runtime bytecodes assigned to account which the contract to be deployed\n"
+      requestBody:
+        description: arguments and environment
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CallData'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallResult'
+  /accounts/{address}/code:
+    parameters:
+    - $ref: '#/components/parameters/AddressInPath'
+    - $ref: '#/components/parameters/RevisionInQuery'
+    get:
+      tags:
+      - Accounts
+      summary: Retrieve account code
+      description: 'if any. Here the code is runtime bytecodes.
+
+        '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Code'
+  /accounts/{address}/storage/{key}:
+    parameters:
+    - $ref: '#/components/parameters/AddressInPath'
+    - $ref: '#/components/parameters/StorageKeyInPath'
+    - $ref: '#/components/parameters/RevisionInQuery'
+    get:
+      tags:
+      - Accounts
+      summary: Retrieve account storage value
+      description: 'for given key.
+
+        '
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Storage'
+components:
+  schemas:
+    Code:
+      properties:
+        code:
+          type: string
+          example: '0x6060604052600080fd00a165627a7a72305820c23d3ae2dc86ad130561a2829d87c7cb8435365492bd1548eb7e7fc0f3632be90029'
+    BatchCallResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/CallResult'
+    Clause:
+      properties:
+        to:
+          type: string
+          description: recipient of clause, null for contract deployment (bytes32)
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        value:
+          type: string
+          description: hex form of token to be transferred
+          example: '0x47fdb3c3f456c0000'
+        data:
+          type: string
+          description: input data (bytes)
+          example: 0x
+    CallResult:
+      properties:
+        data:
+          type: string
+          description: the output data
+          example: '0x103556a73c10e38ffe2fc4aa50fc9d46ad0148f07e26417e117bd1ece9d948b5'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        transfers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transfer'
+        gasUsed:
+          type: integer
+          format: uint64
+          description: gas used during execution
+          example: 21000
+        reverted:
+          type: boolean
+          example: false
+        vmError:
+          type: string
+          example: ''
+    Transfer:
+      properties:
+        sender:
+          type: string
+          description: address that sends tokens
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+        recipient:
+          type: string
+          description: address that receives tokens
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        amount:
+          type: string
+          description: amount of tokens
+          example: '0x47fdb3c3f456c0000'
+    Storage:
+      properties:
+        value:
+          type: string
+          example: '0x0000000000000000000000000000000000000000000000000000000000000001'
+    Account:
+      properties:
+        balance:
+          type: string
+          description: balance in unit WEI, presented with hex string
+          example: '0x47ff1f90327aa0f8e'
+        energy:
+          type: string
+          description: energy in uint WEI, presented with hex string
+          example: '0xcf624158d591398'
+        hasCode:
+          type: boolean
+          description: whether the account has code
+          example: false
+    Event:
+      properties:
+        address:
+          type: string
+          description: the address of contract which produces the event (bytes20)
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
+        topics:
+          type: array
+          items:
+            type: string
+            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+        data:
+          type: string
+          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+    BatchCallData:
+      properties:
+        clauses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Clause'
+        gas:
+          type: integer
+          format: uint64
+          description: max allowed gas for execution
+        gasPrice:
+          type: string
+          description: absolute gas price
+        caller:
+          type: string
+          description: caller address (msg.sender)
+      example:
+        clauses:
+        - to: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+          value: '0xde0b6b3a7640000'
+          data: '0x5665436861696e2054686f72'
+    CallData:
+      properties:
+        value:
+          type: string
+          description: amount of token to be transferred
+        data:
+          type: string
+          description: input data for contract call
+        gas:
+          type: integer
+          format: uint64
+          description: max allowed gas for execution
+        gasPrice:
+          type: string
+          description: absolute gas price
+        caller:
+          type: string
+          description: caller address (msg.sender)
+      example:
+        value: '0xde0b6b3a7640000'
+        data: '0x5665436861696e2054686f72'
+  parameters:
+    RevisionInQuery:
+      name: revision
+      in: query
+      description: can be block number or ID. best block is assumed if omitted.
+      schema:
+        type: string
+    StorageKeyInPath:
+      in: path
+      description: the key(position) to access account storage
+      required: true
+      name: key
+      schema:
+        type: string
+      example: '0x0000000000000000000000000000000000000000000000000000000000000001'
+    AddressInPath:
+      name: address
+      in: path
+      description: address of account
+      required: true
+      schema:
+        type: string
+        format: bytes20
+      example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'

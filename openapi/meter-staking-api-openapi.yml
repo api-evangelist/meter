@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  title: Meterest Accounts Staking API
+  description: 'RESTful API to access Meter.io
+
+
+    [Project Home](https://github.com/meterio)
+
+    '
+  license:
+    name: LGPL 3.0
+    url: https://www.gnu.org/licenses/lgpl-3.0.en.html
+  version: 1.2.2
+servers:
+- url: /
+  description: local meter node
+tags:
+- name: Staking
+  description: Access to staking data
+paths:
+  /staking/buckets:
+    get:
+      tags:
+      - Staking
+      summary: Retrieve staking buckets
+      reponses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: null
+  /staking/candidates:
+    get:
+      tags:
+      - Staking
+      summary: Retrieve staking candidates
+      reponses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: null
+  /staking/stakeholders:
+    get:
+      tags:
+      - Staking
+      summary: Retrieve staking stakeholder
+      reponses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: null
+  /staking/delegates:
+    get:
+      tags:
+      - Staking
+      summary: Retrieve staking delegates for consensus
+      reponses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: null
