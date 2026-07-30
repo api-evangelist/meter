@@ -1,8 +1,16 @@
 aid: meter
 name: Meter
-description: Meter is a company surfaced as a portfolio company of general-catalyst, pantera-capital and
-  added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Meter is a high-performance, EVM-compatible Layer-1 blockchain and cross-chain
+  infrastructure network built for the Web3 economy, backed by General Catalyst and
+  Pantera Capital. Its HotStuff-based hybrid PoV consensus delivers thousands of TPS with
+  instant finality, MEV/censorship resistance, and a metastable gas currency (MTR) pegged
+  to energy alongside the MTRG governance token. Developers reach Meter through a standard
+  Ethereum JSON-RPC endpoint (rpc.meter.io) that works with web3.js, ethers.js, Hardhat,
+  Remix and MetaMask, and through a native RESTful node API ("Meterest") covering accounts,
+  blocks, transactions, event/transfer logs, node status, staking and WebSocket subscriptions.
+  The Meter Passport bridge provides generic cross-chain messaging and asset transfer, and
+  the meterify library gives a web3.js-style adaptor to the native API.
 url: https://raw.githubusercontent.com/api-evangelist/meter/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,17 +19,189 @@ x-backed-by:
 - pantera-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+image: https://avatars.githubusercontent.com/u/50934298?v=4
 tags:
-- Company
-apis: []
+- Blockchain
+- Web3
+- Cryptocurrency
+- Layer-1
+- EVM
+- Cross-chain Bridge
+- Staking
+- Developer Tools
+apis:
+- aid: meter:meter-accounts-api
+  name: Meter Accounts API
+  description: Access to account objects
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-accounts-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-blocks-api
+  name: Meter Blocks API
+  description: Access to blocks
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Blocks
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-blocks-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-debug-api
+  name: Meter Debug API
+  description: Debug utilities
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Debug
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-debug-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-logs-api
+  name: Meter Logs API
+  description: Access to event & transfer logs
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-logs-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-node-api
+  name: Meter Node API
+  description: Access to node status info
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Node
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-node-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-staking-api
+  name: Meter Staking API
+  description: Access to staking data
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Staking
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-staking-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-subscriptions-api
+  name: Meter Subscriptions API
+  description: Subscribe interested subjects
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-subscriptions-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
+- aid: meter:meter-transactions-api
+  name: Meter Transactions API
+  description: Access to transactions
+  humanURL: https://docs.meter.io/developer-documentation/meterify-api
+  baseURL: https://mainnet.meter.io
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/meter-transactions-api-openapi.yml
+  - type: AsyncAPI
+    url: asyncapi/meter-subscriptions-asyncapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: OpenAPI
+  url: openapi/meter-openapi-original.yml
+- type: AsyncAPI
+  url: asyncapi/meter-subscriptions-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/meter-subscriptions-asyncapi.yml
+- type: AgenticAccess
+  url: agentic-access/meter-agentic-access.yml
+- type: DomainSecurity
+  url: security/meter-domain-security.yml
+- type: Packages
+  url: packages/meter-packages.yml
+- type: SDKs
+  url: packages/meter-packages.yml
+- type: MCPServer
+  url: mcp/meter-mcp.yml
+- type: LLMsTxt
+  url: llms/meter-llms.txt
+- type: Overlay
+  url: overlays/meter-openapi-overlay.yaml
+- type: Conventions
+  url: conventions/meter-conventions.yml
+- type: DataModel
+  url: data-model/meter-data-model.yml
+- type: Conformance
+  url: conformance/meter-conformance.yml
+- type: Lifecycle
+  url: lifecycle/meter-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/meter-lifecycle.yml
+- type: ChangeLog
+  url: changelog/meter-changelog.yml
+- type: Sandbox
+  url: sandbox/meter-sandbox.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://docs.meter.io/
+- type: Documentation
+  url: https://docs.meter.io/developer-documentation/introduction
+- type: APIReference
+  url: https://docs.meter.io/developer-documentation/meterify-api-documentation
+- type: GettingStarted
+  url: https://docs.meter.io/developer-documentation/introduction
+- type: GitHubOrganization
+  url: https://github.com/meterio
+- type: Blog
+  url: https://medium.com/meter-io
+- type: Support
+  url: https://forum.meter.io/
+- type: SignUp
+  url: https://wallet.meter.io/
 - type: Website
   url: https://www.meter.io/
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 14
+  pass: local-v1
