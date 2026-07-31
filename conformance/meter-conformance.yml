@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/meter-openapi-original.yml
+standards:
+  - id: evm-compatible
+    conforms: true
+    evidence: >-
+      Meter runs an Ethereum-compatible execution layer; docs and site describe full
+      EVM compatibility and an Ethereum emulation mode.
+  - id: ethereum-json-rpc
+    conforms: true
+    evidence: >-
+      Standard Ethereum JSON-RPC exposed at rpc.meter.io / wss://ws.meter.io; works with
+      web3.js, ethers.js, MetaMask, Hardhat, Remix.
+  - id: openapi-3.0
+    conforms: true
+    evidence: openapi/meter-openapi-original.yml is OpenAPI 3.0.1 (Meterest v1.2.2)
+  - id: rest
+    conforms: true
+    evidence: Native RESTful resource API over accounts/blocks/transactions/logs/staking
+  - id: websocket-subscriptions
+    conforms: true
+    evidence: /subscriptions/{block,event,transfer,beat} are WebSocket streaming channels
+  - id: oauth2
+    conforms: false
+    evidence: No securitySchemes; public unauthenticated node API
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors are plain HTTP status codes, no application/problem+json
+  - id: json-api
+    conforms: false
+  - id: erc20
+    conforms: true
+    evidence: Chain supports ERC20/ERC721/ERC1155 token standards (per Passport docs)
+notes: >-
+  Derived from the OpenAPI, developer docs, and site. No formal third-party API
+  certification program is published; the Meter Passport bridge has a published
+  security audit (see lifecycle/security notes) but Meter does not publish a SOC 2 /
+  ISO 27001 corporate compliance program, so no `Compliance` pointer is emitted.

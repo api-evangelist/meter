@@ -1,0 +1,54 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/meter-openapi-original.yml
+spec_type: AsyncAPI
+asyncapi: 2.6.0
+info:
+  title: Meter Subscriptions (WebSocket)
+  version: 1.2.2
+  description: >-
+    Real-time WebSocket subscription channels of the Meter native node API, generated
+    from the /subscriptions/* GET (websocket-upgrade) operations declared in the Meter
+    RESTful OpenAPI (Meterest v1.2.2). These are the provider's live event surface.
+servers:
+  mainnet:
+    url: ws.meter.io
+    protocol: wss
+    description: Meter mainnet WebSocket
+  testnet:
+    url: wstest.meter.io
+    protocol: wss
+    description: Meter testnet WebSocket
+channels:
+  subscriptions/block:
+    description: Stream of new blocks as they are produced.
+    subscribe:
+      summary: Subscribe to new blocks
+      message:
+        name: Block
+        payload:
+          $ref: 'openapi/meter-openapi-original.yml#/components/schemas/Block'
+  subscriptions/event:
+    description: Stream of contract event logs matching a filter.
+    subscribe:
+      summary: Subscribe to new events
+      message:
+        name: Event
+        payload:
+          $ref: 'openapi/meter-openapi-original.yml#/components/schemas/Event'
+  subscriptions/transfer:
+    description: Stream of value transfers.
+    subscribe:
+      summary: Subscribe to new transfers
+      message:
+        name: Transfer
+        payload:
+          $ref: 'openapi/meter-openapi-original.yml#/components/schemas/Transfer'
+  subscriptions/beat:
+    description: Stream of chain beats (compact per-block bloom notifications).
+    subscribe:
+      summary: Subscribe to block chain beats
+      message:
+        name: Beat
+        payload:
+          $ref: 'openapi/meter-openapi-original.yml#/components/schemas/Beat'

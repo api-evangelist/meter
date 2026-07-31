@@ -1,0 +1,63 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/meter-openapi-original.yml
+notes: >-
+  No official hosted/remote MCP server was found for Meter (no listing on the MCP
+  registry, npm @modelcontextprotocol, or the meterio GitHub org as of 2026-07-20).
+  The tool list below is a CANDIDATE surface derived one-tool-per-operation from the
+  Meter native RESTful OpenAPI (Meterest v1.2.2). The API is a public, unauthenticated
+  blockchain node interface.
+server:
+  name: meter
+  transport: http
+  url: null
+tools:
+  - name: get_account
+    description: Retrieve account detail (balance, energy, hasCode)
+    source_operation: openapi/meter-openapi-original.yml#GET_/accounts/{address}
+  - name: get_account_code
+    description: Retrieve account bytecode
+    source_operation: openapi/meter-openapi-original.yml#GET_/accounts/{address}/code
+  - name: get_account_storage
+    description: Retrieve an account storage value by key
+    source_operation: openapi/meter-openapi-original.yml#GET_/accounts/{address}/storage/{key}
+  - name: call_contract
+    description: Execute account code (read-only contract call)
+    source_operation: openapi/meter-openapi-original.yml#POST_/accounts/{address}
+  - name: batch_call
+    description: Execute a batch of contract calls
+    source_operation: openapi/meter-openapi-original.yml#POST_/accounts/*
+  - name: get_transaction
+    description: Retrieve a transaction by id
+    source_operation: openapi/meter-openapi-original.yml#GET_/transactions/{id}
+  - name: get_transaction_receipt
+    description: Retrieve a transaction receipt
+    source_operation: openapi/meter-openapi-original.yml#GET_/transactions/{id}/receipt
+  - name: submit_transaction
+    description: Commit (broadcast) a signed transaction
+    source_operation: openapi/meter-openapi-original.yml#POST_/transactions
+  - name: get_block
+    description: Retrieve a block by revision (number, id, best, or finalized)
+    source_operation: openapi/meter-openapi-original.yml#GET_/blocks/{revision}
+  - name: filter_event_logs
+    description: Filter event logs by criteria and range
+    source_operation: openapi/meter-openapi-original.yml#POST_/logs/event
+  - name: filter_transfer_logs
+    description: Filter transfer logs by criteria and range
+    source_operation: openapi/meter-openapi-original.yml#POST_/logs/transfer
+  - name: get_peers
+    description: Retrieve connected node peers
+    source_operation: openapi/meter-openapi-original.yml#GET_/node/network/peers
+  - name: get_committee
+    description: Retrieve current consensus committee members
+    source_operation: openapi/meter-openapi-original.yml#GET_/node/consensus/committee
+  - name: get_staking_buckets
+    description: Retrieve staking buckets
+    source_operation: openapi/meter-openapi-original.yml#GET_/staking/buckets
+  - name: get_staking_candidates
+    description: Retrieve staking candidates
+    source_operation: openapi/meter-openapi-original.yml#GET_/staking/candidates
+  - name: get_staking_delegates
+    description: Retrieve staking delegates for consensus
+    source_operation: openapi/meter-openapi-original.yml#GET_/staking/delegates

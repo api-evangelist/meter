@@ -1,0 +1,28 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/meter-openapi-original.yml
+skills:
+  - file: meter-query-account.md
+    name: Query a Meter account
+    api: openapi/meter-openapi-original.yml
+    operations:
+      - 'GET /accounts/{address}'
+      - 'GET /accounts/{address}/code'
+      - 'GET /accounts/{address}/storage/{key}'
+      - 'POST /accounts/{address}'
+  - file: meter-submit-transaction.md
+    name: Submit a Meter transaction
+    api: openapi/meter-openapi-original.yml
+    operations:
+      - 'POST /transactions'
+      - 'GET /transactions/{id}'
+      - 'GET /transactions/{id}/receipt'
+  - file: meter-filter-logs.md
+    name: Filter and stream Meter logs
+    api: openapi/meter-openapi-original.yml
+    operations:
+      - 'POST /logs/event'
+      - 'POST /logs/transfer'
+      - 'GET /subscriptions/event'
+      - 'GET /subscriptions/transfer'
+      - 'GET /subscriptions/block'

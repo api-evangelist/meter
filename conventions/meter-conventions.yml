@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/meter-openapi-original.yml
+docs: https://docs.meter.io/developer-documentation/introduction
+summary: >-
+  Cross-cutting semantics for the Meter native RESTful API (Meterest v1.2.2), a public
+  blockchain node interface derived from the VeChain-Thor API design. Derived from the
+  OpenAPI plus the Meter developer documentation.
+authentication:
+  style: none
+  detail: >-
+    The public native RESTful API and Ethereum RPC endpoints (rpc.meter.io) require no
+    API key or token. Rate limiting is applied at the free public endpoints; dedicated
+    access is available via third-party node providers (BlockPI, NOWNodes, Pokt).
+idempotency:
+  supported: false
+  detail: >-
+    No Idempotency-Key header. Transaction submission is naturally idempotent at the
+    chain level: a signed transaction is uniquely identified by its id/hash, so
+    re-broadcasting the same signed tx does not double-execute. Read operations are safe/idempotent.
+pagination:
+  style: offset-limit
+  detail: >-
+    Log filter operations accept a FilterOptions object with `offset` and `limit`
+    fields (POST /logs/event, /logs/transfer). Block/transaction/account reads are
+    addressed directly by revision/id/address rather than paged.
+  params: [offset, limit]
+revision_addressing:
+  detail: >-
+    Blocks and account/storage reads accept a `revision` (block number, block id,
+    `best`, or `finalized`) via path or the `revision` query parameter, giving
+    point-in-time state access.
+versioning:
+  style: spec-version
+  detail: >-
+    The RESTful API is versioned by the spec/document version (Meterest 1.2.2), not by
+    a URL path segment. Chain-level behavior evolves via named hard forks (e.g. tesla-fork10).
+error_envelope:
+  detail: >-
+    Errors are returned as plain HTTP status codes (400/403/404) with a text body; the
+    OpenAPI declares no structured problem+json schema. Not RFC 9457.
+rate_limit_signaling:
+  detail: >-
+    Public endpoints are rate-limited but the OpenAPI does not declare rate-limit
+    response headers; heavy consumers are directed to dedicated node providers.
+cross_references:
+  data_model: data-model/meter-data-model.yml
+  lifecycle: lifecycle/meter-lifecycle.yml
+  conformance: conformance/meter-conformance.yml
+  streaming: asyncapi/meter-subscriptions-asyncapi.yml

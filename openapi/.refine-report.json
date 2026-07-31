@@ -1,0 +1,28 @@
+{
+  "provider": "meter",
+  "sources": [
+    "meter-accounts-api-openapi.yml",
+    "meter-blocks-api-openapi.yml",
+    "meter-debug-api-openapi.yml",
+    "meter-logs-api-openapi.yml",
+    "meter-node-api-openapi.yml",
+    "meter-staking-api-openapi.yml",
+    "meter-subscriptions-api-openapi.yml",
+    "meter-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "meter-accounts-api-openapi.yml",
+    "meter-blocks-api-openapi.yml",
+    "meter-debug-api-openapi.yml",
+    "meter-logs-api-openapi.yml",
+    "meter-node-api-openapi.yml",
+    "meter-staking-api-openapi.yml",
+    "meter-subscriptions-api-openapi.yml",
+    "meter-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

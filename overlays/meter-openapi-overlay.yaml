@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Meter (Meterest)
+  version: 1.0.0
+extends: openapi/meter-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-rating: 3
+      x-apievangelist-notes: >-
+        Public, unauthenticated Meter native RESTful node API (VeChain-Thor lineage).
+        EVM-compatible chain; also exposes Ethereum JSON-RPC at rpc.meter.io.
+      x-agentic-access: agentic-access/meter-agentic-access.yml
+  - target: $.servers
+    update:
+      - url: https://mainnet.meter.io
+        description: Meter mainnet native RESTful API
+      - url: https://testnet.meter.io
+        description: Meter testnet native RESTful API
+      - url: /
+        description: local meter node
+  - target: $.info
+    update:
+      x-apievangelist-artifacts:
+        conventions: conventions/meter-conventions.yml
+        data-model: data-model/meter-data-model.yml
+        conformance: conformance/meter-conformance.yml
+        lifecycle: lifecycle/meter-lifecycle.yml
+        asyncapi: asyncapi/meter-subscriptions-asyncapi.yml

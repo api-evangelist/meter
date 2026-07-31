@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/meter-openapi-original.yml
+versioning:
+  scheme: spec-version
+  current: '1.2.2'
+  detail: >-
+    The Meter native RESTful API (Meterest) is versioned by document version. Chain
+    protocol upgrades ship as named hard forks (latest tagged release tesla-fork10, 2023-07).
+  docs: https://docs.meter.io/developer-documentation/introduction
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: >-
+    No formal deprecation-policy page or RFC 8594 Sunset/Deprecation header support.
+    However, the OpenAPI explicitly marks the legacy plural log-filter endpoints as
+    deprecated in favor of /logs/event and /logs/transfer.
+deprecated_operations:
+  - openapi/meter-openapi-original.yml#POST_/logs/events
+  - openapi/meter-openapi-original.yml#POST_/logs/transfers
+  - openapi/meter-openapi-original.yml#POST_/events
+  - openapi/meter-openapi-original.yml#POST_/transfers
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+notes: >-
+  No public status page (status.meter.io does not resolve) and no published SLA for the
+  free rate-limited endpoints. The Meter Passport bridge has a published third-party
+  security audit (docs.meter.io/passport/security-audit-for-meter-passport).

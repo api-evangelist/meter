@@ -1,0 +1,81 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/meter-openapi-original.yml
+summary: >-
+  Entity-relationship graph derived from the Meter native RESTful OpenAPI
+  (Meterest v1.2.2) components.schemas $ref links and id-reference fields.
+entities:
+  - name: Account
+    description: On-chain account with balance, energy, and hasCode flags
+    key_fields: [balance, energy, hasCode]
+  - name: Block
+    description: A chain block addressable by revision (number, id, best, finalized)
+    key_fields: [number, id, parentID, timestamp, gasUsed, txsRoot, stateRoot, receiptsRoot]
+  - name: Transaction
+    description: A committed transaction (TxBody + meta); carries one or more clauses
+    key_fields: [chainTag, blockRef, clauses, gas, nonce]
+  - name: Clause
+    description: A single value/data call within a transaction
+    key_fields: [to, value, data]
+  - name: Receipt
+    description: Execution receipt for a transaction, with outputs (events/transfers)
+    key_fields: [gasUsed, gasPayer, paid, reward, reverted, outputs]
+  - name: Event
+    description: A contract event log entry
+    key_fields: [address, topics, data]
+  - name: Transfer
+    description: A value transfer log entry
+    key_fields: [sender, recipient, amount]
+  - name: LogMeta
+    description: Block/transaction context attached to a log or receipt
+    key_fields: [blockID, blockNumber, txID, txOrigin]
+  - name: Bucket
+    description: Staking bucket (via /staking/buckets)
+  - name: Candidate
+    description: Staking candidate / validator (via /staking/candidates)
+  - name: Delegate
+    description: Consensus delegate (via /staking/delegates)
+relationships:
+  - from: Transaction
+    to: Clause
+    type: has_many
+    via: clauses
+  - from: Transaction
+    to: TxMeta
+    type: has_one
+    via: meta
+  - from: Transaction
+    to: Receipt
+    type: has_one
+    via: transaction id (/transactions/{id}/receipt)
+  - from: Receipt
+    to: Event
+    type: has_many
+    via: outputs[].events
+  - from: Receipt
+    to: Transfer
+    type: has_many
+    via: outputs[].transfers
+  - from: Receipt
+    to: LogMeta
+    type: has_one
+    via: meta
+  - from: Event
+    to: LogMeta
+    type: has_one
+    via: meta
+  - from: Transfer
+    to: LogMeta
+    type: has_one
+    via: meta
+  - from: Block
+    to: Transaction
+    type: has_many
+    via: transactions (block body)
+  - from: Account
+    to: Block
+    type: belongs_to
+    via: revision (point-in-time state)
+notes: >-
+  Meter is EVM-compatible; account addresses are 20-byte hex (0x...), tx/block ids are
+  32-byte hex hashes. No id-prefix scheme (unlike object-prefixed SaaS APIs).

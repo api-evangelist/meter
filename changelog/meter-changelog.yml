@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/meterio/meter-pov/releases
+scheme: named-hard-forks
+current: tesla-fork10
+detail: >-
+  Meter's core node (meter-pov) ships protocol upgrades as named, dated GitHub
+  releases (hard forks). This captures the recent published-release window; the live
+  GitHub releases page is the source of truth.
+entries:
+  - version: tesla-fork10
+    date: '2023-07-11'
+    breaking: true
+    highlights: Fork10 protocol upgrade
+  - version: tesla-fork9-fix1
+    date: '2023-05-18'
+    breaking: false
+    highlights: Fix release on top of fork9
+  - version: tesla-fork9
+    date: '2023-04-18'
+    breaking: true
+    highlights: Fork9 protocol upgrade

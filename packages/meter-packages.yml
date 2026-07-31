@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: https://registry.npmjs.org/meterify
+packages:
+  - language: javascript
+    registry: npm
+    name: meterify
+    url: https://www.npmjs.com/package/meterify
+    repo: https://github.com/meterio/meterify
+    version: 1.4.8
+    install: npm install meterify
+    description: >-
+      web3 adaptor for the Meter native RESTful HTTP API; exposes a web3.js-like
+      interface (meterify.eth, meterify.eth.Contract, meterify.eth.accounts,
+      meterify.utils) that produces native Meter transactions instead of Ethereum tx.
+    official: true
+  - language: go
+    registry: github
+    name: meter-sdk
+    url: https://github.com/meterio/meter-sdk
+    repo: https://github.com/meterio/meter-sdk
+    install: go get github.com/meterio/meter-sdk
+    description: First-party Go SDK for the Meter blockchain (not published to a package registry; consume via Go modules from source).
+    official: true
+notes: >-
+  Meter is EVM-compatible, so standard Ethereum tooling (web3.js, ethers.js, web3j)
+  works against the Ethereum-RPC endpoints (rpc.meter.io). The libraries listed here
+  are the FIRST-PARTY meterio libraries for the *native* Meter RESTful API; the generic
+  Ethereum SDKs are not vendored here. No official PyPI/RubyGems/NuGet/crates package
+  found (meterify is npm-only; 'meter'/'meter-sdk' on PyPI are unrelated third-party packages).

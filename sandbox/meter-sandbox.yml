@@ -1,0 +1,30 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.meter.io/developer-documentation/introduction
+summary: >-
+  Meter runs a public testnet that mirrors mainnet for development. There is no
+  API-key sandbox; the "sandbox" is the testnet chain reachable over the same
+  Ethereum-RPC and native-RESTful/WebSocket interfaces as mainnet.
+test_vs_live:
+  model: separate-network
+  detail: Testnet and mainnet are distinct chains with distinct endpoints (below).
+endpoints:
+  testnet:
+    ethereum_rpc: https://rpctest.meter.io
+    ethereum_ws: wss://wstest.meter.io
+    native_restful: https://testnet.meter.io
+    the_graph: http://graphtest.meter.io:8020/
+  mainnet:
+    ethereum_rpc: https://rpc.meter.io
+    ethereum_ws: wss://ws.meter.io
+    native_restful: https://mainnet.meter.io
+    the_graph: http://graph.meter.io:8020/
+test_gas:
+  detail: >-
+    Testnet gas (test MTR) is obtained from the Meter testnet faucet / community
+    Discord rather than purchased. No test card / hosted-token model applies (this is
+    an L1 blockchain, not a payments API).
+notes: >-
+  No secret sandbox credentials to capture — the interfaces are public and
+  unauthenticated. Contract-verification tooling (Sourcify) and IDEs (Remix, Hardhat)
+  can point at the testnet RPC for a full test loop.
