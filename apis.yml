@@ -147,7 +147,7 @@ maintainers:
   email: info@apis.io
 common:
 - type: OpenAPI
-  url: openapi/meter-openapi-original.yml
+  url: openapi/_original/meter-openapi-original.yml
 - type: AsyncAPI
   url: asyncapi/meter-subscriptions-asyncapi.yml
 - type: Webhooks
