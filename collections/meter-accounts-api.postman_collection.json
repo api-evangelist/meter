@@ -1,0 +1,681 @@
+{
+  "item": [
+    {
+      "id": "ba3c3bb1-c0c3-4e36-a901-b640dc02ce49",
+      "name": "Accounts",
+      "description": {
+        "content": "Access to account objects",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fb73560-58bf-4a1f-b6d5-31913b14d837",
+          "name": "Retrieve account detail",
+          "request": {
+            "name": "Retrieve account detail",
+            "description": {
+              "content": "includes `balance`, `energy` and `hasCode`, by account `address`. An account with `hasCode` be *true* is a contract.\n\nHistorical account detail can be queried by specifying `revision` query string.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "can be block number or ID. best block is assumed if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<bytes20>",
+                  "key": "address",
+                  "description": "(Required) address of account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32217750-9b38-4a61-ad61-5719277c1453",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<bytes20>",
+                      "key": "address",
+                      "description": "(Required) address of account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balance\": \"0x47ff1f90327aa0f8e\",\n  \"energy\": \"0xcf624158d591398\",\n  \"hasCode\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bf85ee7-798d-449e-8a95-21a6834be1ef",
+          "name": "Execute account code",
+          "request": {
+            "name": "Execute account code",
+            "description": {
+              "content": "to simulate contract method call, without sending transaction to block chain.\n\nIt's useful to estimate gas usage and execution result of a clause.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":address"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "can be block number or ID. best block is assumed if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<bytes20>",
+                  "key": "address",
+                  "description": "(Required) address of account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<string>\",\n  \"data\": \"<string>\",\n  \"gas\": \"<uint64>\",\n  \"gasPrice\": \"<string>\",\n  \"caller\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3670e39-9983-48f5-85de-da833ca02c2e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":address"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<bytes20>",
+                      "key": "address",
+                      "description": "(Required) address of account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"0xde0b6b3a7640000\",\n  \"data\": \"0x5665436861696e2054686f72\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"0x103556a73c10e38ffe2fc4aa50fc9d46ad0148f07e26417e117bd1ece9d948b5\",\n  \"events\": [\n    {\n      \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n      \"topics\": [\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      ],\n      \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n    },\n    {\n      \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n      \"topics\": [\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      ],\n      \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n    }\n  ],\n  \"transfers\": [\n    {\n      \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n      \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"amount\": \"0x47fdb3c3f456c0000\"\n    },\n    {\n      \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n      \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"amount\": \"0x47fdb3c3f456c0000\"\n    }\n  ],\n  \"gasUsed\": 21000,\n  \"reverted\": false,\n  \"vmError\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2ac9121-7166-4287-9395-d70a220bcd90",
+          "name": "Execute a batch of codes",
+          "request": {
+            "name": "Execute a batch of codes",
+            "description": {
+              "content": "to simulate execution of a transaction.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "*"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "can be block number or ID. best block is assumed if omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clauses\": [\n    {\n      \"to\": \"<string>\",\n      \"value\": \"<string>\",\n      \"data\": \"<string>\"\n    },\n    {\n      \"to\": \"<string>\",\n      \"value\": \"<string>\",\n      \"data\": \"<string>\"\n    }\n  ],\n  \"gas\": \"<uint64>\",\n  \"gasPrice\": \"<string>\",\n  \"caller\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8fec199-6021-4ddf-a888-ec19ebe6c073",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "*"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clauses\": [\n    {\n      \"to\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"value\": \"0x47fdb3c3f456c0000\",\n      \"data\": \"0x\"\n    },\n    {\n      \"to\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"value\": \"0x47fdb3c3f456c0000\",\n      \"data\": \"0x\"\n    }\n  ],\n  \"gas\": \"<uint64>\",\n  \"gasPrice\": \"<string>\",\n  \"caller\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"data\": \"0x103556a73c10e38ffe2fc4aa50fc9d46ad0148f07e26417e117bd1ece9d948b5\",\n    \"events\": [\n      {\n        \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n        \"topics\": [\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        ],\n        \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      },\n      {\n        \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n        \"topics\": [\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        ],\n        \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      }\n    ],\n    \"transfers\": [\n      {\n        \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n        \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n        \"amount\": \"0x47fdb3c3f456c0000\"\n      },\n      {\n        \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n        \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n        \"amount\": \"0x47fdb3c3f456c0000\"\n      }\n    ],\n    \"gasUsed\": 21000,\n    \"reverted\": false,\n    \"vmError\": \"\"\n  },\n  {\n    \"data\": \"0x103556a73c10e38ffe2fc4aa50fc9d46ad0148f07e26417e117bd1ece9d948b5\",\n    \"events\": [\n      {\n        \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n        \"topics\": [\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        ],\n        \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      },\n      {\n        \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n        \"topics\": [\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n          \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        ],\n        \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      }\n    ],\n    \"transfers\": [\n      {\n        \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n        \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n        \"amount\": \"0x47fdb3c3f456c0000\"\n      },\n      {\n        \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n        \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n        \"amount\": \"0x47fdb3c3f456c0000\"\n      }\n    ],\n    \"gasUsed\": 21000,\n    \"reverted\": false,\n    \"vmError\": \"\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "420f1292-ce0f-46e4-a407-f644fe30280e",
+          "name": "Execute bytecodes",
+          "request": {
+            "name": "Execute bytecodes",
+            "description": {
+              "content": "to simulate contract deployment without sending transaction to block chain.\n\nIt's useful to estimate gas usage and contract deployment result of a clause.\n\n### TIPS:\n  - `data` in request body is the bytecodes of a contract\n  - `data` in response body is the runtime bytecodes assigned to account which the contract to be deployed\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "can be block number or ID. best block is assumed if omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<string>\",\n  \"data\": \"<string>\",\n  \"gas\": \"<uint64>\",\n  \"gasPrice\": \"<string>\",\n  \"caller\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2884f31d-755c-470b-aece-4d405ecb0620",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"0xde0b6b3a7640000\",\n  \"data\": \"0x5665436861696e2054686f72\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"0x103556a73c10e38ffe2fc4aa50fc9d46ad0148f07e26417e117bd1ece9d948b5\",\n  \"events\": [\n    {\n      \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n      \"topics\": [\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      ],\n      \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n    },\n    {\n      \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n      \"topics\": [\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n        \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n      ],\n      \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n    }\n  ],\n  \"transfers\": [\n    {\n      \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n      \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"amount\": \"0x47fdb3c3f456c0000\"\n    },\n    {\n      \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n      \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"amount\": \"0x47fdb3c3f456c0000\"\n    }\n  ],\n  \"gasUsed\": 21000,\n  \"reverted\": false,\n  \"vmError\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bf04d7c-a1b4-4be8-b93c-6c052bdba098",
+          "name": "Retrieve account code",
+          "request": {
+            "name": "Retrieve account code",
+            "description": {
+              "content": "if any. Here the code is runtime bytecodes.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":address",
+                "code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "can be block number or ID. best block is assumed if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<bytes20>",
+                  "key": "address",
+                  "description": "(Required) address of account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac0f46ef-97ee-43ba-a5fa-35183a7d3c19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":address",
+                    "code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<bytes20>",
+                      "key": "address",
+                      "description": "(Required) address of account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"0x6060604052600080fd00a165627a7a72305820c23d3ae2dc86ad130561a2829d87c7cb8435365492bd1548eb7e7fc0f3632be90029\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0956a537-0075-4936-a20e-af1589de9110",
+          "name": "Retrieve account storage value",
+          "request": {
+            "name": "Retrieve account storage value",
+            "description": {
+              "content": "for given key.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":address",
+                "storage",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "can be block number or ID. best block is assumed if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<bytes20>",
+                  "key": "address",
+                  "description": "(Required) address of account"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) the key(position) to access account storage"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d056d30a-7c5a-4eaa-9fed-de3319263910",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":address",
+                    "storage",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<bytes20>",
+                      "key": "address",
+                      "description": "(Required) address of account"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) the key(position) to access account storage"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"value\": \"0x0000000000000000000000000000000000000000000000000000000000000001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a8ea903e-f362-4748-a528-7ba5463d5b82",
+    "name": "Meterest Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API to access Meter.io\n\n[Project Home](https://github.com/meterio)\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,335 @@
+{
+  "item": [
+    {
+      "id": "f780bb45-b6ef-4139-ab9e-65aad84484a0",
+      "name": "Transactions",
+      "description": {
+        "content": "Access to transactions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb7a8b7c-e2fd-4fca-8a46-ef43bf9858dd",
+          "name": "Retrieve transaction",
+          "request": {
+            "name": "Retrieve transaction",
+            "description": {
+              "content": "by ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "raw",
+                  "value": "<boolean>",
+                  "description": "whether retrieve a raw transaction."
+                },
+                {
+                  "disabled": false,
+                  "key": "head",
+                  "value": "<string>",
+                  "description": "ID of head block. best block is assumed if omitted"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of transaction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d396c0a1-6072-43d3-a787-529fff222b17",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "raw",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "head",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"chainTag\": 39,\n  \"blockRef\": \"0x0004f6cb730dbd90\",\n  \"expiration\": 720,\n  \"clauses\": [\n    {\n      \"to\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"value\": \"0x47fdb3c3f456c0000\",\n      \"data\": \"0x\"\n    },\n    {\n      \"to\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n      \"value\": \"0x47fdb3c3f456c0000\",\n      \"data\": \"0x\"\n    }\n  ],\n  \"gasPriceCoef\": 0,\n  \"gas\": 21000,\n  \"dependsOn\": \"string\",\n  \"nonce\": \"0x29c257e36ea6e72a\",\n  \"id\": \"0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477\",\n  \"origin\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n  \"size\": 130,\n  \"meta\": {\n    \"blockID\": \"0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215\",\n    \"blockNumber\": 325324,\n    \"blockTimestamp\": 1533267900\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3aeaa94f-5fa7-4758-b79b-2017e27c3962",
+          "name": "Retrieve transaction receipt",
+          "request": {
+            "name": "Retrieve transaction receipt",
+            "description": {
+              "content": "by ID.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "receipt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "head",
+                  "value": "<string>",
+                  "description": "ID of head block. best block is assumed if omitted"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of transaction"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e741875-d3b8-400d-8cb6-e0e5dfde6b7f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "receipt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "head",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of transaction"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"gasUsed\": 21000,\n  \"gasPayer\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n  \"paid\": \"0x1236efcbcbb340000\",\n  \"reward\": \"0x576e189f04f60000\",\n  \"reverted\": false,\n  \"outputs\": [\n    {\n      \"contractAddress\": \"string\",\n      \"events\": [\n        {\n          \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n          \"topics\": [\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n          ],\n          \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        },\n        {\n          \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n          \"topics\": [\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n          ],\n          \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        }\n      ],\n      \"transfers\": [\n        {\n          \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n          \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n          \"amount\": \"0x47fdb3c3f456c0000\"\n        },\n        {\n          \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n          \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n          \"amount\": \"0x47fdb3c3f456c0000\"\n        }\n      ]\n    },\n    {\n      \"contractAddress\": \"string\",\n      \"events\": [\n        {\n          \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n          \"topics\": [\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n          ],\n          \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        },\n        {\n          \"address\": \"0x7567d83b7b8d80addcb281a71d54fc7b3364ffed\",\n          \"topics\": [\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\",\n            \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n          ],\n          \"data\": \"0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8\"\n        }\n      ],\n      \"transfers\": [\n        {\n          \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n          \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n          \"amount\": \"0x47fdb3c3f456c0000\"\n        },\n        {\n          \"sender\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\",\n          \"recipient\": \"0x5034aa590125b64023a0262112b98d72e3c8e40e\",\n          \"amount\": \"0x47fdb3c3f456c0000\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"blockID\": \"0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215\",\n    \"blockNumber\": 325324,\n    \"blockTimestamp\": 1533267900,\n    \"txID\": \"0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477\",\n    \"txOrigin\": \"0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea40d1b0-405e-4e79-a646-cbe49f02d734",
+          "name": "Commit transaction",
+          "request": {
+            "name": "Commit transaction",
+            "description": {
+              "content": "in raw or structured format. If no signature in structured format,\n`signingHash` is returned in response body.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"raw\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa302fd0-40d9-48e0-8503-7d343d7a43cc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"raw\": \"0xf86981ba800adad994000000000000000000000000000000000000746f82271080018252088001c0b8414792c9439594098323900e6470742cd877ec9f9906bca05510e421f3b013ed221324e77ca10d3466b32b1800c72e12719b213f1d4c370305399dd27af962626400\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "393a2db3-85bd-402e-a56e-8eb21742169f",
+    "name": "Meterest Accounts Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API to access Meter.io\n\n[Project Home](https://github.com/meterio)\n",
+      "type": "text/plain"
+    }
+  }
+}

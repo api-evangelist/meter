@@ -1,0 +1,136 @@
+{
+  "item": [
+    {
+      "id": "e19a0247-c89a-495c-9eb7-bf983de4f5fd",
+      "name": "Staking",
+      "description": {
+        "content": "Access to staking data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a2f9eaa-575b-46d1-b5be-84a86ffaa2d4",
+          "name": "Retrieve staking buckets",
+          "request": {
+            "name": "Retrieve staking buckets",
+            "description": {},
+            "url": {
+              "path": [
+                "staking",
+                "buckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "228a9896-6f24-41fe-b017-320646e40f18",
+          "name": "Retrieve staking candidates",
+          "request": {
+            "name": "Retrieve staking candidates",
+            "description": {},
+            "url": {
+              "path": [
+                "staking",
+                "candidates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2db7109-14ec-48fd-84cf-dbc85791e319",
+          "name": "Retrieve staking stakeholder",
+          "request": {
+            "name": "Retrieve staking stakeholder",
+            "description": {},
+            "url": {
+              "path": [
+                "staking",
+                "stakeholders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee793011-9f06-44ae-80f2-4d8399d594d1",
+          "name": "Retrieve staking delegates for consensus",
+          "request": {
+            "name": "Retrieve staking delegates for consensus",
+            "description": {},
+            "url": {
+              "path": [
+                "staking",
+                "delegates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "455998ea-755c-4d7f-bba8-4ece15529745",
+    "name": "Meterest Accounts Staking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API to access Meter.io\n\n[Project Home](https://github.com/meterio)\n",
+      "type": "text/plain"
+    }
+  }
+}

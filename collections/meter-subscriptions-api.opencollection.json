@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Subscriptions API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "(Websocket) Subscribe new blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/subscriptions/block",
+            "params": [
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "a saved block ID for resuming the subscription. best block ID is assumed if omitted.\n"
+              }
+            ]
+          },
+          "docs": "(Websocket) Subscribe new blocks"
+        },
+        {
+          "info": {
+            "name": "(Websocket) Subscribe new events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/subscriptions/event",
+            "params": [
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "a saved block ID for resuming the subscription. best block ID is assumed if omitted.\n"
+              },
+              {
+                "name": "addr",
+                "value": "",
+                "type": "query",
+                "description": "address of event emitter"
+              },
+              {
+                "name": "t0",
+                "value": "",
+                "type": "query",
+                "description": "topic0 of event"
+              },
+              {
+                "name": "t1",
+                "value": "",
+                "type": "query",
+                "description": "topic1 of event"
+              },
+              {
+                "name": "t2",
+                "value": "",
+                "type": "query",
+                "description": "topic2 of event"
+              },
+              {
+                "name": "t3",
+                "value": "",
+                "type": "query",
+                "description": "topic3 of event"
+              },
+              {
+                "name": "t4",
+                "value": "",
+                "type": "query",
+                "description": "topic4 of event"
+              }
+            ]
+          },
+          "docs": "which satisfy criteria in query.\n"
+        },
+        {
+          "info": {
+            "name": "(Websocket) Subscribe new transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/subscriptions/transfer",
+            "params": [
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "a saved block ID for resuming the subscription. best block ID is assumed if omitted.\n"
+              },
+              {
+                "name": "txOrigin",
+                "value": "",
+                "type": "query",
+                "description": "signer address of tx which contains the transfer"
+              },
+              {
+                "name": "sender",
+                "value": "",
+                "type": "query",
+                "description": "address of token sender"
+              },
+              {
+                "name": "recipient",
+                "value": "",
+                "type": "query",
+                "description": "address of token recipient"
+              }
+            ]
+          },
+          "docs": "which satisfy criteria in query.\n"
+        },
+        {
+          "info": {
+            "name": "(Websocket) Subscribe block chain's beats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/subscriptions/beat",
+            "params": [
+              {
+                "name": "pos",
+                "value": "",
+                "type": "query",
+                "description": "a saved block ID for resuming the subscription. best block ID is assumed if omitted.\n"
+              }
+            ]
+          },
+          "docs": "which contain summary of new blocks, and bloom filters that composited with affected addresses.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

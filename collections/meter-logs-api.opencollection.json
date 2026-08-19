@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Logs API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Filter event logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/logs/event",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Event logs are produced by `OP_LOG` in EVM.\n"
+        },
+        {
+          "info": {
+            "name": "Filter transfer logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/logs/transfer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer logs are recorded on MTRG transferring.\n"
+        },
+        {
+          "info": {
+            "name": "Filter event logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/logs/events",
+            "params": [
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "order of filters, defaults to `asc`\n"
+              },
+              {
+                "name": "address",
+                "value": "0x0000000000000000000000000000456e65726779",
+                "type": "query",
+                "description": "address of account which is the events emitter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Event logs are produced by `OP_LOG` in EVM.\n"
+        },
+        {
+          "info": {
+            "name": "Filter transfer logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/logs/transfers",
+            "params": [
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "order of filters, defaults to `asc`\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer logs are recorded on MTR transferring.\n"
+        },
+        {
+          "info": {
+            "name": "Filter event logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/events",
+            "params": [
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "order of filters, defaults to `asc`\n"
+              },
+              {
+                "name": "address",
+                "value": "0x0000000000000000000000000000456e65726779",
+                "type": "query",
+                "description": "address of account which is the events emitter"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Filter event logs"
+        },
+        {
+          "info": {
+            "name": "Filter transfer logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/transfers",
+            "params": [
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "order of filters, defaults to `asc`\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Filter transfer logs"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

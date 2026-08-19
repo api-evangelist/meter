@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve account detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/accounts/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x5034aa590125b64023a0262112b98d72e3c8e40e",
+                "type": "path",
+                "description": "address of account"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "can be block number or ID. best block is assumed if omitted."
+              }
+            ]
+          },
+          "docs": "includes `balance`, `energy` and `hasCode`, by account `address`. An account with `hasCode` be *true* is a contract.\n\nHistorical account detail can be queried by specifying `revision` query string.\n"
+        },
+        {
+          "info": {
+            "name": "Execute account code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/accounts/:address",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x5034aa590125b64023a0262112b98d72e3c8e40e",
+                "type": "path",
+                "description": "address of account"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "can be block number or ID. best block is assumed if omitted."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "to simulate contract method call, without sending transaction to block chain.\n\nIt's useful to estimate gas usage and execution result of a clause.\n"
+        },
+        {
+          "info": {
+            "name": "Execute a batch of codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/accounts/*",
+            "params": [
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "can be block number or ID. best block is assumed if omitted."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "to simulate execution of a transaction.\n"
+        },
+        {
+          "info": {
+            "name": "Execute bytecodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/accounts",
+            "params": [
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "can be block number or ID. best block is assumed if omitted."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "to simulate contract deployment without sending transaction to block chain.\n\nIt's useful to estimate gas usage and contract deployment result of a clause.\n\n### TIPS:\n  - `data` in request body is the bytecodes of a contract\n  - `data` in response body is the runtime bytecodes assigned to account which the contract to be deployed\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve account code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/accounts/:address/code",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x5034aa590125b64023a0262112b98d72e3c8e40e",
+                "type": "path",
+                "description": "address of account"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "can be block number or ID. best block is assumed if omitted."
+              }
+            ]
+          },
+          "docs": "if any. Here the code is runtime bytecodes.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve account storage value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/accounts/:address/storage/:key",
+            "params": [
+              {
+                "name": "address",
+                "value": "0x5034aa590125b64023a0262112b98d72e3c8e40e",
+                "type": "path",
+                "description": "address of account"
+              },
+              {
+                "name": "key",
+                "value": "0x0000000000000000000000000000000000000000000000000000000000000001",
+                "type": "path",
+                "description": "the key(position) to access account storage"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query",
+                "description": "can be block number or ID. best block is assumed if omitted."
+              }
+            ]
+          },
+          "docs": "for given key.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

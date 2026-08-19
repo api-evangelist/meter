@@ -1,0 +1,120 @@
+{
+  "item": [
+    {
+      "id": "40e04f3f-1cff-4357-90e5-a09eec5d8fff",
+      "name": "Blocks",
+      "description": {
+        "content": "Access to blocks",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2910630-6730-4f53-bc2f-8963325f181c",
+          "name": "Retrieve block",
+          "request": {
+            "name": "Retrieve block",
+            "description": {
+              "content": "by ID or number, or 'best' for latest block.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "blocks",
+                ":revision"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "revision",
+                  "description": "(Required) block ID or number, or 'best' stands for latest block\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2841bf3-7c80-464b-ad9d-3d3df644c6b7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "blocks",
+                    ":revision"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "revision",
+                      "description": "(Required) block ID or number, or 'best' stands for latest block\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"number\": 325324,\n  \"id\": \"0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215\",\n  \"size\": 373,\n  \"parentID\": \"0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d\",\n  \"timestamp\": 1533267900,\n  \"gasLimit\": 11253579,\n  \"beneficiary\": \"0xb4094c25f86d628fdd571afc4077f0d0196afb48\",\n  \"gasUsed\": 21000,\n  \"totalScore\": 1029988,\n  \"txsRoot\": \"0x89dfd9fcd10c9e53d68592cf8b540b280b72d381b868523223992f3e09a806bb\",\n  \"stateRoot\": \"0x86bcc6d214bc9d8d0dedba1012a63c8317d19ce97f60c8a2ef5c59bbd40d4261\",\n  \"receiptsRoot\": \"0x15787e2533c470e8a688e6cd17a1ee12d8457778d5f82d2c109e2d6226d8e54e\",\n  \"signer\": \"0xab7b27fc9e7d29f9f2e5bd361747a5515d0cc2d1\",\n  \"transactions\": [\n    \"0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477\",\n    \"0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477\"\n  ],\n  \"isTrunk\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8494082a-3b2f-400d-9a8b-e2807a522db9",
+    "name": "Meterest Accounts Blocks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API to access Meter.io\n\n[Project Home](https://github.com/meterio)\n",
+      "type": "text/plain"
+    }
+  }
+}

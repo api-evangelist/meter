@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Transactions API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "0x9bcc6526a76ae560244f698805cc001977246cb92c2b4f1e2b7a204e445409ea",
+                "type": "path",
+                "description": "ID of transaction"
+              },
+              {
+                "name": "raw",
+                "value": "",
+                "type": "query",
+                "description": "whether retrieve a raw transaction."
+              },
+              {
+                "name": "head",
+                "value": "",
+                "type": "query",
+                "description": "ID of head block. best block is assumed if omitted"
+              }
+            ]
+          },
+          "docs": "by ID.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve transaction receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/transactions/:id/receipt",
+            "params": [
+              {
+                "name": "id",
+                "value": "0x9bcc6526a76ae560244f698805cc001977246cb92c2b4f1e2b7a204e445409ea",
+                "type": "path",
+                "description": "ID of transaction"
+              },
+              {
+                "name": "head",
+                "value": "",
+                "type": "query",
+                "description": "ID of head block. best block is assumed if omitted"
+              }
+            ]
+          },
+          "docs": "by ID.\n"
+        },
+        {
+          "info": {
+            "name": "Commit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/transactions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "in raw or structured format. If no signature in structured format,\n`signingHash` is returned in response body.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

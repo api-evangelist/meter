@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Blocks API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve block",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/blocks/:revision",
+            "params": [
+              {
+                "name": "revision",
+                "value": "best",
+                "type": "path",
+                "description": "block ID or number, or 'best' stands for latest block\n"
+              }
+            ]
+          },
+          "docs": "by ID or number, or 'best' for latest block.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

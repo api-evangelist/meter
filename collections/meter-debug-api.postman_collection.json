@@ -1,0 +1,218 @@
+{
+  "item": [
+    {
+      "id": "dafcaad7-c91d-401e-b74e-089c1647a402",
+      "name": "Debug",
+      "description": {
+        "content": "Debug utilities",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d85a630-b56a-444a-898b-696c980ba87a",
+          "name": "Create a tracer",
+          "request": {
+            "name": "Create a tracer",
+            "description": {
+              "content": "for a clause",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debug",
+                "tracers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"target\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63cbc56b-5816-4196-87a4-f76954186964",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debug",
+                    "tracers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"target\": \"0x000dabb4d6f0a80ad7ad7cd0e07a1f20b546db0730d869d5ccb0dd2a16e7595b/0/0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ac49520-77f5-48e6-ab0d-148b178d7932",
+          "name": "Retrieve storage range",
+          "request": {
+            "name": "Retrieve storage range",
+            "description": {
+              "content": "of the account with given address\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debug",
+                "storage-range"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"<string>\",\n  \"keyStart\": \"<string>\",\n  \"maxResult\": \"<number>\",\n  \"target\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f28eb13-4425-404d-8400-44518a60029f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debug",
+                    "storage-range"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address\": \"0xa4627036e2095eb71c2341054daa63577c062498\",\n  \"keyStart\": \"0x0000000000000000000000000000000000000000000000000000000000000000\",\n  \"maxResult\": 10,\n  \"target\": \"0x000edefb448685f9c72fc2b946980ef51d8d208bbaa4d3fdcf0c57d4847aca2e/0/0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nextKey\": \"string\",\n  \"storage\": {\n    \"0x33e423980c9b37d048bd5fadbd4a2aeb95146922045405accc2f468d0ef96988\": {\n      \"key\": \"0x0000000000000000000000000000000000000000000000000000000000000001\",\n      \"value\": \"0x00000000000000000000000000000000000000000000000000000000000000c8\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "24e14900-4bae-440b-ac32-972c005411bf",
+    "name": "Meterest Accounts Debug API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "RESTful API to access Meter.io\n\n[Project Home](https://github.com/meterio)\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Node API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Node",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve connected peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/node/network/peers"
+          },
+          "docs": "Retrieve connected peers"
+        },
+        {
+          "info": {
+            "name": "Retrieve current committee members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/node/consensus/committee"
+          },
+          "docs": "Retrieve current committee members"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

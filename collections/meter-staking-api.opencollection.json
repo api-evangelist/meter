@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Staking API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Staking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve staking buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/staking/buckets"
+          },
+          "docs": "Retrieve staking buckets"
+        },
+        {
+          "info": {
+            "name": "Retrieve staking candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/staking/candidates"
+          },
+          "docs": "Retrieve staking candidates"
+        },
+        {
+          "info": {
+            "name": "Retrieve staking stakeholder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/staking/stakeholders"
+          },
+          "docs": "Retrieve staking stakeholder"
+        },
+        {
+          "info": {
+            "name": "Retrieve staking delegates for consensus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/staking/delegates"
+          },
+          "docs": "Retrieve staking delegates for consensus"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

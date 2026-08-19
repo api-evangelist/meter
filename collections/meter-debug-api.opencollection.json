@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meterest Accounts Debug API",
+    "version": "1.2.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Debug",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a tracer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/debug/tracers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "for a clause"
+        },
+        {
+          "info": {
+            "name": "Retrieve storage range",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/debug/storage-range",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "of the account with given address\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
