@@ -38,6 +38,15 @@ tags:
 - Blockchain
 - Web3
 - Cryptocurrency
+- Layer 1
+- EVM
+- Cross-Chain Bridge
+- Staking
+- Developer Tools
+tags_raw:
+- Blockchain
+- Web3
+- Cryptocurrency
 - Layer-1
 - EVM
 - Cross-chain Bridge
@@ -50,6 +59,8 @@ apis:
   humanURL: https://docs.meter.io/developer-documentation/meterify-api
   baseURL: https://mainnet.meter.io
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -122,6 +133,8 @@ apis:
   humanURL: https://docs.meter.io/developer-documentation/meterify-api
   baseURL: https://mainnet.meter.io
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -134,6 +147,8 @@ apis:
   humanURL: https://docs.meter.io/developer-documentation/meterify-api
   baseURL: https://mainnet.meter.io
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
