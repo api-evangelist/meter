@@ -1,14 +1,7 @@
 {
   "provider": "meter",
   "sources": [
-    "meter-accounts-api-openapi.yml",
-    "meter-blocks-api-openapi.yml",
-    "meter-debug-api-openapi.yml",
-    "meter-logs-api-openapi.yml",
-    "meter-node-api-openapi.yml",
-    "meter-staking-api-openapi.yml",
-    "meter-subscriptions-api-openapi.yml",
-    "meter-transactions-api-openapi.yml"
+    "_original/meter-openapi-original.yml"
   ],
   "outputs": [
     "meter-accounts-api-openapi.yml",
@@ -23,6 +16,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "meter-openapi-original.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "meter-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-blocks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-debug-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-node-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-staking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "meter-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

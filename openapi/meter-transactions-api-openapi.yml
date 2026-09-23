@@ -1,12 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Meterest Accounts Transactions API
+  title: Meterest Transactions API
   description: 'RESTful API to access Meter.io
 
 
-    [Project Home](https://github.com/meterio)
-
-    '
+    Project Home'
   license:
     name: LGPL 3.0
     url: https://www.gnu.org/licenses/lgpl-3.0.en.html
@@ -27,9 +25,7 @@ paths:
       tags:
       - Transactions
       summary: Retrieve transaction
-      description: 'by ID.
-
-        '
+      description: by ID.
       responses:
         '200':
           description: OK
@@ -37,6 +33,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TxOrRawTxWithMeta'
+      operationId: getTransactionsById
+      x-operation-id-source: derived
   /transactions/{id}/receipt:
     parameters:
     - $ref: '#/components/parameters/TxIDInPath'
@@ -45,9 +43,7 @@ paths:
       tags:
       - Transactions
       summary: Retrieve transaction receipt
-      description: 'by ID.
-
-        '
+      description: by ID.
       responses:
         '200':
           description: OK
@@ -55,6 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Receipt'
+      operationId: getTransactionsByIdReceipt
+      x-operation-id-source: derived
   /transactions:
     post:
       tags:
@@ -62,9 +60,7 @@ paths:
       summary: Commit transaction
       description: 'in raw or structured format. If no signature in structured format,
 
-        `signingHash` is returned in response body.
-
-        '
+        `signingHash` is returned in response body.'
       requestBody:
         required: true
         content:
@@ -78,34 +74,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IDOrSigningHash'
+      operationId: postTransactions
+      x-operation-id-source: derived
 components:
   schemas:
-    Clause:
-      properties:
-        to:
-          type: string
-          description: recipient of clause, null for contract deployment (bytes32)
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        value:
-          type: string
-          description: hex form of token to be transferred
-          example: '0x47fdb3c3f456c0000'
-        data:
-          type: string
-          description: input data (bytes)
-          example: 0x
-    IDOrSigningHash:
-      oneOf:
-      - type: object
-        properties:
-          id:
-            type: string
-      - type: object
-        properties:
-          signingHash:
-            type: string
-      example:
-        id: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
     TxOrRawTxWithMeta:
       oneOf:
       - $ref: '#/components/schemas/TxWithMeta'
@@ -126,43 +98,18 @@ components:
           blockID: '0x00000001c458949985a6d86b7139690b8811dd3b4647c02d4f41cdefb7d32327'
           blockNumber: 1
           blockTimestamp: 1523156271
-    RawTx:
-      properties:
-        raw:
-          type: string
-          description: hex form of encoded transaction
-          example: '0xf86981ba800adad994000000000000000000000000000000000000746f82271080018252088001c0b8414792c9439594098323900e6470742cd877ec9f9906bca05510e421f3b013ed221324e77ca10d3466b32b1800c72e12719b213f1d4c370305399dd27af962626400'
-    TxMeta:
-      description: transaction meta info
-      properties:
-        blockID:
-          type: string
-          description: block identifier (bytes32)
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        blockNumber:
-          type: integer
-          format: uint32
-          description: block number (height)
-          example: 325324
-        blockTimestamp:
-          type: integer
-          format: uint64
-          description: block unix timestamp
-          example: 1533267900
-    Transfer:
-      properties:
-        sender:
-          type: string
-          description: address that sends tokens
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-        recipient:
-          type: string
-          description: address that receives tokens
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        amount:
-          type: string
-          description: amount of tokens
-          example: '0x47fdb3c3f456c0000'
+    IDOrSigningHash:
+      oneOf:
+      - type: object
+        properties:
+          id:
+            type: string
+      - type: object
+        properties:
+          signingHash:
+            type: string
+      example:
+        id: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
     SignedTx:
       allOf:
       - $ref: '#/components/schemas/TxBody'
@@ -172,6 +119,40 @@ components:
             type: string
             description: signature hex string
             example: '0x67cd851b90fb016457bb30ccbdaa3405f3db667daeb95258e1859c545be30c10f1780476f7c6ba24c75d26c8f1a9df59fe89b105c6f86733c1d5c1c74f14cd9201'
+    TxWithMeta:
+      allOf:
+      - $ref: '#/components/schemas/TxBody'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: identifier of the transaction
+            example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
+          origin:
+            type: string
+            description: the one who signed the transaction
+            example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+          size:
+            type: integer
+            format: uint32
+            description: byte size of the transaction that is RLP encoded
+            example: 130
+          meta:
+            $ref: '#/components/schemas/TxMeta'
+    Clause:
+      properties:
+        to:
+          type: string
+          description: recipient of clause, null for contract deployment (bytes32)
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        value:
+          type: string
+          description: hex form of token to be transferred
+          example: '0x47fdb3c3f456c0000'
+        data:
+          type: string
+          description: input data (bytes)
+          example: 0x
     LogMeta:
       description: event or transfer log meta info
       properties:
@@ -197,6 +178,65 @@ components:
           type: string
           description: transaction origin (signer)
           example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+    RawTxWithMeta:
+      properties:
+        raw:
+          type: string
+          description: hex form of encoded transaction
+          example: '0xf86981ba800adad994000000000000000000000000000000000000746f82271080018252088001c0b8414792c9439594098323900e6470742cd877ec9f9906bca05510e421f3b013ed221324e77ca10d3466b32b1800c72e12719b213f1d4c370305399dd27af962626400'
+        meta:
+          $ref: '#/components/schemas/TxMeta'
+    RawTx:
+      properties:
+        raw:
+          type: string
+          description: hex form of encoded transaction
+          example: '0xf86981ba800adad994000000000000000000000000000000000000746f82271080018252088001c0b8414792c9439594098323900e6470742cd877ec9f9906bca05510e421f3b013ed221324e77ca10d3466b32b1800c72e12719b213f1d4c370305399dd27af962626400'
+    Transfer:
+      properties:
+        sender:
+          type: string
+          description: address that sends tokens
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+        recipient:
+          type: string
+          description: address that receives tokens
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        amount:
+          type: string
+          description: amount of tokens
+          example: '0x47fdb3c3f456c0000'
+    Event:
+      properties:
+        address:
+          type: string
+          description: the address of contract which produces the event (bytes20)
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
+        topics:
+          type: array
+          items:
+            type: string
+            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+        data:
+          type: string
+          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+    TxMeta:
+      description: transaction meta info
+      properties:
+        blockID:
+          type: string
+          description: block identifier (bytes32)
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        blockNumber:
+          type: integer
+          format: uint32
+          description: block number (height)
+          example: 325324
+        blockTimestamp:
+          type: integer
+          format: uint64
+          description: block unix timestamp
+          example: 1533267900
     TxBody:
       properties:
         chainTag:
@@ -279,40 +319,6 @@ components:
                   $ref: '#/components/schemas/Transfer'
         meta:
           $ref: '#/components/schemas/LogMeta'
-    Event:
-      properties:
-        address:
-          type: string
-          description: the address of contract which produces the event (bytes20)
-          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-        topics:
-          type: array
-          items:
-            type: string
-            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-        data:
-          type: string
-          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-    TxWithMeta:
-      allOf:
-      - $ref: '#/components/schemas/TxBody'
-      - type: object
-        properties:
-          id:
-            type: string
-            description: identifier of the transaction
-            example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
-          origin:
-            type: string
-            description: the one who signed the transaction
-            example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-          size:
-            type: integer
-            format: uint32
-            description: byte size of the transaction that is RLP encoded
-            example: 130
-          meta:
-            $ref: '#/components/schemas/TxMeta'
     RawOrSignedOrUnsignedTx:
       oneOf:
       - $ref: '#/components/schemas/RawTx'
@@ -320,15 +326,13 @@ components:
       - $ref: '#/components/schemas/TxBody'
       example:
         raw: '0xf86981ba800adad994000000000000000000000000000000000000746f82271080018252088001c0b8414792c9439594098323900e6470742cd877ec9f9906bca05510e421f3b013ed221324e77ca10d3466b32b1800c72e12719b213f1d4c370305399dd27af962626400'
-    RawTxWithMeta:
-      properties:
-        raw:
-          type: string
-          description: hex form of encoded transaction
-          example: '0xf86981ba800adad994000000000000000000000000000000000000746f82271080018252088001c0b8414792c9439594098323900e6470742cd877ec9f9906bca05510e421f3b013ed221324e77ca10d3466b32b1800c72e12719b213f1d4c370305399dd27af962626400'
-        meta:
-          $ref: '#/components/schemas/TxMeta'
   parameters:
+    HeadInQuery:
+      name: head
+      in: query
+      description: ID of head block. best block is assumed if omitted
+      schema:
+        type: string
     TxIDInPath:
       in: path
       description: ID of transaction
@@ -337,12 +341,6 @@ components:
       schema:
         type: string
       example: '0x9bcc6526a76ae560244f698805cc001977246cb92c2b4f1e2b7a204e445409ea'
-    HeadInQuery:
-      name: head
-      in: query
-      description: ID of head block. best block is assumed if omitted
-      schema:
-        type: string
     RawInQuery:
       name: raw
       in: query

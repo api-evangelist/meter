@@ -1,12 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Meterest Accounts Debug API
+  title: Meterest Debug API
   description: 'RESTful API to access Meter.io
 
 
-    [Project Home](https://github.com/meterio)
-
-    '
+    Project Home'
   license:
     name: LGPL 3.0
     url: https://www.gnu.org/licenses/lgpl-3.0.en.html
@@ -37,14 +35,14 @@ paths:
             application/json:
               schema:
                 type: object
+      operationId: postDebugTracers
+      x-operation-id-source: derived
   /debug/storage-range:
     post:
       tags:
       - Debug
       summary: Retrieve storage range
-      description: 'of the account with given address
-
-        '
+      description: of the account with given address
       requestBody:
         required: true
         content:
@@ -58,25 +56,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StorageRange'
+      operationId: postDebugStorageRange
+      x-operation-id-source: derived
 components:
   schemas:
-    StorageRangeOption:
-      properties:
-        address:
-          type: string
-          description: 'address of account
-
-            '
-          example: '0xa4627036e2095eb71c2341054daa63577c062498'
-        keyStart:
-          type: string
-          example: '0x0000000000000000000000000000000000000000000000000000000000000000'
-        maxResult:
-          type: number
-          example: 10
-        target:
-          type: string
-          example: 0x000edefb448685f9c72fc2b946980ef51d8d208bbaa4d3fdcf0c57d4847aca2e/0/0
     StorageRange:
       properties:
         nextKey:
@@ -116,3 +99,20 @@ components:
 
             '
           example: 0x000dabb4d6f0a80ad7ad7cd0e07a1f20b546db0730d869d5ccb0dd2a16e7595b/0/0
+    StorageRangeOption:
+      properties:
+        address:
+          type: string
+          description: 'address of account
+
+            '
+          example: '0xa4627036e2095eb71c2341054daa63577c062498'
+        keyStart:
+          type: string
+          example: '0x0000000000000000000000000000000000000000000000000000000000000000'
+        maxResult:
+          type: number
+          example: 10
+        target:
+          type: string
+          example: 0x000edefb448685f9c72fc2b946980ef51d8d208bbaa4d3fdcf0c57d4847aca2e/0/0

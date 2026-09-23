@@ -1,12 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Meterest Accounts Subscriptions API
+  title: Meterest Subscriptions API
   description: 'RESTful API to access Meter.io
 
 
-    [Project Home](https://github.com/meterio)
-
-    '
+    Project Home'
   license:
     name: LGPL 3.0
     url: https://www.gnu.org/licenses/lgpl-3.0.en.html
@@ -34,14 +32,14 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/Block'
                 - $ref: '#/components/schemas/Obsolete'
+      operationId: getSubscriptionsBlock
+      x-operation-id-source: derived
   /subscriptions/event:
     get:
       tags:
       - Subscriptions
       summary: (Websocket) Subscribe new events
-      description: 'which satisfy criteria in query.
-
-        '
+      description: which satisfy criteria in query.
       parameters:
       - $ref: '#/components/parameters/PositionInQuery'
       - name: addr
@@ -87,14 +85,14 @@ paths:
                   properties:
                     meta:
                       $ref: '#/components/schemas/LogMeta'
+      operationId: getSubscriptionsEvent
+      x-operation-id-source: derived
   /subscriptions/transfer:
     get:
       tags:
       - Subscriptions
       summary: (Websocket) Subscribe new transfers
-      description: 'which satisfy criteria in query.
-
-        '
+      description: which satisfy criteria in query.
       parameters:
       - $ref: '#/components/parameters/PositionInQuery'
       - name: txOrigin
@@ -125,14 +123,14 @@ paths:
                   properties:
                     meta:
                       $ref: '#/components/schemas/LogMeta'
+      operationId: getSubscriptionsTransfer
+      x-operation-id-source: derived
   /subscriptions/beat:
     get:
       tags:
       - Subscriptions
       summary: (Websocket) Subscribe block chain's beats
-      description: 'which contain summary of new blocks, and bloom filters that composited with affected addresses.
-
-        '
+      description: which contain summary of new blocks, and bloom filters that composited with affected addresses.
       parameters:
       - $ref: '#/components/parameters/PositionInQuery'
       responses:
@@ -144,17 +142,81 @@ paths:
                 allOf:
                 - $ref: '#/components/schemas/Beat'
                 - $ref: '#/components/schemas/Obsolete'
+      operationId: getSubscriptionsBeat
+      x-operation-id-source: derived
 components:
-  parameters:
-    PositionInQuery:
-      name: pos
-      in: query
-      description: 'a saved block ID for resuming the subscription. best block ID is assumed if omitted.
-
-        '
-      schema:
-        type: string
   schemas:
+    Obsolete:
+      properties:
+        obsolete:
+          type: boolean
+          description: 'indicates whether the block containing this data become branch block
+
+            '
+    Event:
+      properties:
+        address:
+          type: string
+          description: the address of contract which produces the event (bytes20)
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
+        topics:
+          type: array
+          items:
+            type: string
+            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+        data:
+          type: string
+          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+    Transfer:
+      properties:
+        sender:
+          type: string
+          description: address that sends tokens
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+        recipient:
+          type: string
+          description: address that receives tokens
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        amount:
+          type: string
+          description: amount of tokens
+          example: '0x47fdb3c3f456c0000'
+    Beat:
+      properties:
+        number:
+          type: integer
+          format: uint32
+          description: block number (height)
+          example: 325324
+        id:
+          type: string
+          format: bytes32
+          description: block identifier
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        parentID:
+          type: string
+          format: bytes32
+          description: parent block ID
+          example: '0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d'
+        timestamp:
+          type: integer
+          format: uint64
+          description: block unix timestamp
+          example: 1533267900
+        bloom:
+          type: string
+          format: hex
+          description: 'the bloom filter composited with affected addresses
+
+            '
+          example: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+        k:
+          type: integer
+          format: uint32
+          description: 'the number of hash functions for bloom filter
+
+            '
+          example: 3
     Block:
       properties:
         number:
@@ -230,27 +292,6 @@ components:
             format: bytes32
             description: transaction ID
             example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
-    Obsolete:
-      properties:
-        obsolete:
-          type: boolean
-          description: 'indicates whether the block containing this data become branch block
-
-            '
-    Transfer:
-      properties:
-        sender:
-          type: string
-          description: address that sends tokens
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-        recipient:
-          type: string
-          description: address that receives tokens
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        amount:
-          type: string
-          description: amount of tokens
-          example: '0x47fdb3c3f456c0000'
     LogMeta:
       description: event or transfer log meta info
       properties:
@@ -276,53 +317,12 @@ components:
           type: string
           description: transaction origin (signer)
           example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-    Event:
-      properties:
-        address:
-          type: string
-          description: the address of contract which produces the event (bytes20)
-          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-        topics:
-          type: array
-          items:
-            type: string
-            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-        data:
-          type: string
-          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-    Beat:
-      properties:
-        number:
-          type: integer
-          format: uint32
-          description: block number (height)
-          example: 325324
-        id:
-          type: string
-          format: bytes32
-          description: block identifier
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        parentID:
-          type: string
-          format: bytes32
-          description: parent block ID
-          example: '0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d'
-        timestamp:
-          type: integer
-          format: uint64
-          description: block unix timestamp
-          example: 1533267900
-        bloom:
-          type: string
-          format: hex
-          description: 'the bloom filter composited with affected addresses
+  parameters:
+    PositionInQuery:
+      name: pos
+      in: query
+      description: 'a saved block ID for resuming the subscription. best block ID is assumed if omitted.
 
-            '
-          example: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-        k:
-          type: integer
-          format: uint32
-          description: 'the number of hash functions for bloom filter
-
-            '
-          example: 3
+        '
+      schema:
+        type: string

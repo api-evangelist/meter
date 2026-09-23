@@ -1,12 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Meterest Accounts Blocks API
+  title: Meterest Blocks API
   description: 'RESTful API to access Meter.io
 
 
-    [Project Home](https://github.com/meterio)
-
-    '
+    Project Home'
   license:
     name: LGPL 3.0
     url: https://www.gnu.org/licenses/lgpl-3.0.en.html
@@ -25,9 +23,7 @@ paths:
       tags:
       - Blocks
       summary: Retrieve block
-      description: 'by ID or number, or ''best'' for latest block.
-
-        '
+      description: by ID or number, or 'best' for latest block.
       responses:
         '200':
           description: OK
@@ -41,6 +37,8 @@ paths:
                     isTrunk:
                       type: boolean
                       description: whether the block is on th trunk
+      operationId: getBlocksByRevision
+      x-operation-id-source: derived
 components:
   schemas:
     Block:
