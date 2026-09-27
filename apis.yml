@@ -55,6 +55,7 @@ tags:
 - Cross-Chain Bridge
 - Staking
 - Developer Tools
+- Real-Time
 tags_raw:
 - Blockchain
 - Web3
@@ -64,6 +65,7 @@ tags_raw:
 - Cross-chain Bridge
 - Staking
 - Developer Tools
+- Real-Time
 apis:
 - aid: meter:meter-accounts-api
   name: Meter Accounts API

@@ -181,42 +181,31 @@ components:
           type: string
           description: amount of tokens
           example: '0x47fdb3c3f456c0000'
-    Beat:
+    LogMeta:
+      description: event or transfer log meta info
       properties:
-        number:
+        blockID:
+          type: string
+          description: block identifier (bytes32)
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        blockNumber:
           type: integer
           format: uint32
           description: block number (height)
           example: 325324
-        id:
-          type: string
-          format: bytes32
-          description: block identifier
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        parentID:
-          type: string
-          format: bytes32
-          description: parent block ID
-          example: '0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d'
-        timestamp:
+        blockTimestamp:
           type: integer
           format: uint64
           description: block unix timestamp
           example: 1533267900
-        bloom:
+        txID:
           type: string
-          format: hex
-          description: 'the bloom filter composited with affected addresses
-
-            '
-          example: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-        k:
-          type: integer
-          format: uint32
-          description: 'the number of hash functions for bloom filter
-
-            '
-          example: 3
+          description: transaction identifier
+          example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
+        txOrigin:
+          type: string
+          description: transaction origin (signer)
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
     Block:
       properties:
         number:
@@ -292,31 +281,42 @@ components:
             format: bytes32
             description: transaction ID
             example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
-    LogMeta:
-      description: event or transfer log meta info
+    Beat:
       properties:
-        blockID:
-          type: string
-          description: block identifier (bytes32)
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        blockNumber:
+        number:
           type: integer
           format: uint32
           description: block number (height)
           example: 325324
-        blockTimestamp:
+        id:
+          type: string
+          format: bytes32
+          description: block identifier
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        parentID:
+          type: string
+          format: bytes32
+          description: parent block ID
+          example: '0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d'
+        timestamp:
           type: integer
           format: uint64
           description: block unix timestamp
           example: 1533267900
-        txID:
+        bloom:
           type: string
-          description: transaction identifier
-          example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
-        txOrigin:
-          type: string
-          description: transaction origin (signer)
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+          format: hex
+          description: 'the bloom filter composited with affected addresses
+
+            '
+          example: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+        k:
+          type: integer
+          format: uint32
+          description: 'the number of hash functions for bloom filter
+
+            '
+          example: 3
   parameters:
     PositionInQuery:
       name: pos
