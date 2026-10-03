@@ -146,13 +146,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Obsolete:
-      properties:
-        obsolete:
-          type: boolean
-          description: 'indicates whether the block containing this data become branch block
-
-            '
     Event:
       properties:
         address:
@@ -167,45 +160,6 @@ components:
         data:
           type: string
           example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-    Transfer:
-      properties:
-        sender:
-          type: string
-          description: address that sends tokens
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-        recipient:
-          type: string
-          description: address that receives tokens
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        amount:
-          type: string
-          description: amount of tokens
-          example: '0x47fdb3c3f456c0000'
-    LogMeta:
-      description: event or transfer log meta info
-      properties:
-        blockID:
-          type: string
-          description: block identifier (bytes32)
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        blockNumber:
-          type: integer
-          format: uint32
-          description: block number (height)
-          example: 325324
-        blockTimestamp:
-          type: integer
-          format: uint64
-          description: block unix timestamp
-          example: 1533267900
-        txID:
-          type: string
-          description: transaction identifier
-          example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
-        txOrigin:
-          type: string
-          description: transaction origin (signer)
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
     Block:
       properties:
         number:
@@ -281,6 +235,27 @@ components:
             format: bytes32
             description: transaction ID
             example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
+    Transfer:
+      properties:
+        sender:
+          type: string
+          description: address that sends tokens
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+        recipient:
+          type: string
+          description: address that receives tokens
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        amount:
+          type: string
+          description: amount of tokens
+          example: '0x47fdb3c3f456c0000'
+    Obsolete:
+      properties:
+        obsolete:
+          type: boolean
+          description: 'indicates whether the block containing this data become branch block
+
+            '
     Beat:
       properties:
         number:
@@ -317,6 +292,31 @@ components:
 
             '
           example: 3
+    LogMeta:
+      description: event or transfer log meta info
+      properties:
+        blockID:
+          type: string
+          description: block identifier (bytes32)
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        blockNumber:
+          type: integer
+          format: uint32
+          description: block number (height)
+          example: 325324
+        blockTimestamp:
+          type: integer
+          format: uint64
+          description: block unix timestamp
+          example: 1533267900
+        txID:
+          type: string
+          description: transaction identifier
+          example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
+        txOrigin:
+          type: string
+          description: transaction origin (signer)
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
   parameters:
     PositionInQuery:
       name: pos

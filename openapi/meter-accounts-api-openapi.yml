@@ -157,31 +157,26 @@ paths:
       operationId: getAccountsByAddressStorageByKey
       x-operation-id-source: derived
 components:
-  parameters:
-    StorageKeyInPath:
-      in: path
-      description: the key(position) to access account storage
-      required: true
-      name: key
-      schema:
-        type: string
-      example: '0x0000000000000000000000000000000000000000000000000000000000000001'
-    RevisionInQuery:
-      name: revision
-      in: query
-      description: can be block number or ID. best block is assumed if omitted.
-      schema:
-        type: string
-    AddressInPath:
-      name: address
-      in: path
-      description: address of account
-      required: true
-      schema:
-        type: string
-        format: bytes20
-      example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
   schemas:
+    Event:
+      properties:
+        address:
+          type: string
+          description: the address of contract which produces the event (bytes20)
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
+        topics:
+          type: array
+          items:
+            type: string
+            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+        data:
+          type: string
+          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+    Storage:
+      properties:
+        value:
+          type: string
+          example: '0x0000000000000000000000000000000000000000000000000000000000000001'
     Code:
       properties:
         code:
@@ -208,20 +203,24 @@ components:
       example:
         value: '0xde0b6b3a7640000'
         data: '0x5665436861696e2054686f72'
-    Account:
+    Transfer:
       properties:
-        balance:
+        sender:
           type: string
-          description: balance in unit WEI, presented with hex string
-          example: '0x47ff1f90327aa0f8e'
-        energy:
+          description: address that sends tokens
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+        recipient:
           type: string
-          description: energy in uint WEI, presented with hex string
-          example: '0xcf624158d591398'
-        hasCode:
-          type: boolean
-          description: whether the account has code
-          example: false
+          description: address that receives tokens
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        amount:
+          type: string
+          description: amount of tokens
+          example: '0x47fdb3c3f456c0000'
+    BatchCallResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/CallResult'
     CallResult:
       properties:
         data:
@@ -247,57 +246,20 @@ components:
         vmError:
           type: string
           example: ''
-    Transfer:
+    Account:
       properties:
-        sender:
+        balance:
           type: string
-          description: address that sends tokens
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-        recipient:
+          description: balance in unit WEI, presented with hex string
+          example: '0x47ff1f90327aa0f8e'
+        energy:
           type: string
-          description: address that receives tokens
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        amount:
-          type: string
-          description: amount of tokens
-          example: '0x47fdb3c3f456c0000'
-    Event:
-      properties:
-        address:
-          type: string
-          description: the address of contract which produces the event (bytes20)
-          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-        topics:
-          type: array
-          items:
-            type: string
-            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-        data:
-          type: string
-          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-    BatchCallResult:
-      type: array
-      items:
-        $ref: '#/components/schemas/CallResult'
-    Storage:
-      properties:
-        value:
-          type: string
-          example: '0x0000000000000000000000000000000000000000000000000000000000000001'
-    Clause:
-      properties:
-        to:
-          type: string
-          description: recipient of clause, null for contract deployment (bytes32)
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        value:
-          type: string
-          description: hex form of token to be transferred
-          example: '0x47fdb3c3f456c0000'
-        data:
-          type: string
-          description: input data (bytes)
-          example: 0x
+          description: energy in uint WEI, presented with hex string
+          example: '0xcf624158d591398'
+        hasCode:
+          type: boolean
+          description: whether the account has code
+          example: false
     BatchCallData:
       properties:
         clauses:
@@ -319,3 +281,41 @@ components:
         - to: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
           value: '0xde0b6b3a7640000'
           data: '0x5665436861696e2054686f72'
+    Clause:
+      properties:
+        to:
+          type: string
+          description: recipient of clause, null for contract deployment (bytes32)
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        value:
+          type: string
+          description: hex form of token to be transferred
+          example: '0x47fdb3c3f456c0000'
+        data:
+          type: string
+          description: input data (bytes)
+          example: 0x
+  parameters:
+    AddressInPath:
+      name: address
+      in: path
+      description: address of account
+      required: true
+      schema:
+        type: string
+        format: bytes20
+      example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+    StorageKeyInPath:
+      in: path
+      description: the key(position) to access account storage
+      required: true
+      name: key
+      schema:
+        type: string
+      example: '0x0000000000000000000000000000000000000000000000000000000000000001'
+    RevisionInQuery:
+      name: revision
+      in: query
+      description: can be block number or ID. best block is assumed if omitted.
+      schema:
+        type: string

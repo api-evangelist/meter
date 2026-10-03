@@ -60,17 +60,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    StorageRange:
-      properties:
-        nextKey:
-          type: string
-          example: null
-        storage:
-          type: object
-          example:
-            '0x33e423980c9b37d048bd5fadbd4a2aeb95146922045405accc2f468d0ef96988':
-              key: '0x0000000000000000000000000000000000000000000000000000000000000001'
-              value: '0x00000000000000000000000000000000000000000000000000000000000000c8'
     StorageRangeOption:
       properties:
         address:
@@ -116,3 +105,14 @@ components:
 
             '
           example: 0x000dabb4d6f0a80ad7ad7cd0e07a1f20b546db0730d869d5ccb0dd2a16e7595b/0/0
+    StorageRange:
+      properties:
+        nextKey:
+          type: string
+          example: null
+        storage:
+          type: object
+          example:
+            '0x33e423980c9b37d048bd5fadbd4a2aeb95146922045405accc2f468d0ef96988':
+              key: '0x0000000000000000000000000000000000000000000000000000000000000001'
+              value: '0x00000000000000000000000000000000000000000000000000000000000000c8'

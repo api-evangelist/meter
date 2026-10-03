@@ -201,51 +201,21 @@ paths:
       operationId: postTransfers
       x-operation-id-source: derived
 components:
-  parameters:
-    FilterAddressInQuery:
-      name: address
-      in: query
-      description: address of account which is the events emitter
-      required: false
-      schema:
-        type: string
-      example: '0x0000000000000000000000000000456e65726779'
-    FilterOrderInQuery:
-      name: order
-      in: query
-      description: 'order of filters, defaults to `asc`
-
-        '
-      required: false
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
-      example: asc
   schemas:
-    FilterRange:
+    Event:
       properties:
-        unit:
+        address:
           type: string
-          enum:
-          - block
-          - time
-          example: block
-          description: 'defines the unit of `from` and `to`.
-
-            `block` means block number, `time` means block timestamp, default to `block`.
-
-            '
-        from:
-          type: integer
-          format: uint64
-          example: 0
-        to:
-          type: integer
-          format: uint64
-          example: 100000
-      description: "defines the range to filter in. e.g.\n```\n{\n  \"range\": {\n    \"unit\": \"block\",\n    \"from\": 10,\n    \"to\": 1000\n  }\n}\n```\nrefers to the range from block 10 to block 1000.\n`null` stands for the full range.\n"
+          description: the address of contract which produces the event (bytes20)
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
+        topics:
+          type: array
+          items:
+            type: string
+            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+        data:
+          type: string
+          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
     TopicSetLegacy:
       properties:
         topic0:
@@ -261,20 +231,6 @@ components:
       description: "a set of topics joined with `and` operator. `null` topics are ignored. e.g. \n```\n{\n  \"topic0\": \"0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef\",\n  \"topic1\": null\n}\n```\nmatches events whose `topic0` equals `0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef`.\n"
       example:
         topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
-    Event:
-      properties:
-        address:
-          type: string
-          description: the address of contract which produces the event (bytes20)
-          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-        topics:
-          type: array
-          items:
-            type: string
-            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-        data:
-          type: string
-          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
     TransferCriteria:
       properties:
         txOrigin:
@@ -286,41 +242,17 @@ components:
         recipient:
           type: string
           example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-    EventFilterLegacy:
+    AddressSetLegacy:
       properties:
-        range:
-          $ref: '#/components/schemas/FilterRange'
-        options:
-          $ref: '#/components/schemas/FilterOptions'
-        topicSets:
-          type: array
-          items:
-            $ref: '#/components/schemas/TopicSetLegacy'
-    LogMeta:
-      description: event or transfer log meta info
-      properties:
-        blockID:
-          type: string
-          description: block identifier (bytes32)
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        blockNumber:
-          type: integer
-          format: uint32
-          description: block number (height)
-          example: 325324
-        blockTimestamp:
-          type: integer
-          format: uint64
-          description: block unix timestamp
-          example: 1533267900
-        txID:
-          type: string
-          description: transaction identifier
-          example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
         txOrigin:
           type: string
-          description: transaction origin (signer)
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+          example: '0xe59d475abe695c7f67a8a2321f33a856b0b4c71d'
+        sender:
+          type: string
+          example: '0xe59d475abe695c7f67a8a2321f33a856b0b4c71d'
+        recipient:
+          type: string
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
     EventFilter:
       properties:
         range:
@@ -339,6 +271,45 @@ components:
           enum:
           - asc
           - desc
+    TransferFilterLegacy:
+      properties:
+        range:
+          $ref: '#/components/schemas/FilterRange'
+        options:
+          $ref: '#/components/schemas/FilterOptions'
+        addressSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressSetLegacy'
+    Transfer:
+      properties:
+        sender:
+          type: string
+          description: address that sends tokens
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+        recipient:
+          type: string
+          description: address that receives tokens
+          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
+        amount:
+          type: string
+          description: amount of tokens
+          example: '0x47fdb3c3f456c0000'
+    FilterOptions:
+      properties:
+        offset:
+          type: integer
+          example: 0
+          description: 'offset in matched record set
+
+            '
+        limit:
+          type: integer
+          example: 10
+          description: 'limit of records to output
+
+            '
+      description: "pass these parameters if you need filtered results paged. e.g. \n```\n{\n  \"options\": {\n    \"offset\": 0,\n    \"limit\": 10   \n  }\n}\n```\nthe above refers that page offset is 0, and the page size is 10.\npass options `null` if you don't need to demand paging.\n"
     TransferFilter:
       properties:
         range:
@@ -376,53 +347,82 @@ components:
       example:
         address: '0xe59d475abe695c7f67a8a2321f33a856b0b4c71d'
         topic0: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
-    Transfer:
-      properties:
-        sender:
-          type: string
-          description: address that sends tokens
-          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
-        recipient:
-          type: string
-          description: address that receives tokens
-          example: '0x5034aa590125b64023a0262112b98d72e3c8e40e'
-        amount:
-          type: string
-          description: amount of tokens
-          example: '0x47fdb3c3f456c0000'
-    AddressSetLegacy:
-      properties:
-        txOrigin:
-          type: string
-          example: '0xe59d475abe695c7f67a8a2321f33a856b0b4c71d'
-        sender:
-          type: string
-          example: '0xe59d475abe695c7f67a8a2321f33a856b0b4c71d'
-        recipient:
-          type: string
-          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-    TransferFilterLegacy:
+    EventFilterLegacy:
       properties:
         range:
           $ref: '#/components/schemas/FilterRange'
         options:
           $ref: '#/components/schemas/FilterOptions'
-        addressSets:
+        topicSets:
           type: array
           items:
-            $ref: '#/components/schemas/AddressSetLegacy'
-    FilterOptions:
+            $ref: '#/components/schemas/TopicSetLegacy'
+    FilterRange:
       properties:
-        offset:
+        unit:
+          type: string
+          enum:
+          - block
+          - time
+          example: block
+          description: 'defines the unit of `from` and `to`.
+
+            `block` means block number, `time` means block timestamp, default to `block`.
+
+            '
+        from:
           type: integer
+          format: uint64
           example: 0
-          description: 'offset in matched record set
-
-            '
-        limit:
+        to:
           type: integer
-          example: 10
-          description: 'limit of records to output
+          format: uint64
+          example: 100000
+      description: "defines the range to filter in. e.g.\n```\n{\n  \"range\": {\n    \"unit\": \"block\",\n    \"from\": 10,\n    \"to\": 1000\n  }\n}\n```\nrefers to the range from block 10 to block 1000.\n`null` stands for the full range.\n"
+    LogMeta:
+      description: event or transfer log meta info
+      properties:
+        blockID:
+          type: string
+          description: block identifier (bytes32)
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        blockNumber:
+          type: integer
+          format: uint32
+          description: block number (height)
+          example: 325324
+        blockTimestamp:
+          type: integer
+          format: uint64
+          description: block unix timestamp
+          example: 1533267900
+        txID:
+          type: string
+          description: transaction identifier
+          example: '0x284bba50ef777889ff1a367ed0b38d5e5626714477c40de38d71cedd6f9fa477'
+        txOrigin:
+          type: string
+          description: transaction origin (signer)
+          example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+  parameters:
+    FilterOrderInQuery:
+      name: order
+      in: query
+      description: 'order of filters, defaults to `asc`
 
-            '
-      description: "pass these parameters if you need filtered results paged. e.g. \n```\n{\n  \"options\": {\n    \"offset\": 0,\n    \"limit\": 10   \n  }\n}\n```\nthe above refers that page offset is 0, and the page size is 10.\npass options `null` if you don't need to demand paging.\n"
+        '
+      required: false
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
+      example: asc
+    FilterAddressInQuery:
+      name: address
+      in: query
+      description: address of account which is the events emitter
+      required: false
+      schema:
+        type: string
+      example: '0x0000000000000000000000000000456e65726779'
