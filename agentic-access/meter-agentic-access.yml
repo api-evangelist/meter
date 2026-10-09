@@ -1,22 +1,25 @@
-generated: '2026-07-20'
+generated: '2026-09-23'
 method: generated
-source: openapi/meter-openapi-original.yml
+source: openapi/meter-accounts-api-openapi.yml, openapi/meter-blocks-api-openapi.yml, openapi/meter-debug-api-openapi.yml,
+  openapi/meter-logs-api-openapi.yml, openapi/meter-node-api-openapi.yml, openapi/meter-staking-api-openapi.yml,
+  openapi/meter-subscriptions-api-openapi.yml, openapi/meter-transactions-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 28
   by_action_class:
-    connected: 16
-    acting: 12
+    connected: 17
+    acting: 11
   by_consequence:
-    read: 16
-    write: 9
+    read: 17
+    write: 8
     physical: 3
   human_in_the_loop_required: 0
 operations:
 - path: /accounts/{address}
   method: get
+  operationId: getAccountsByAddress
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -26,6 +29,7 @@ operations:
     audit: none
 - path: /accounts/{address}
   method: post
+  operationId: postAccountsByAddress
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -41,6 +45,7 @@ operations:
     audit: required
 - path: /accounts/*
   method: post
+  operationId: postAccounts*
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -56,6 +61,7 @@ operations:
     audit: required
 - path: /accounts
   method: post
+  operationId: postAccounts
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -71,6 +77,7 @@ operations:
     audit: required
 - path: /accounts/{address}/code
   method: get
+  operationId: getAccountsByAddressCode
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -80,6 +87,7 @@ operations:
     audit: none
 - path: /accounts/{address}/storage/{key}
   method: get
+  operationId: getAccountsByAddressStorageByKey
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -87,8 +95,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /transactions/{id}
+- path: /blocks/{revision}
   method: get
+  operationId: getBlocksByRevision
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -96,17 +105,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /transactions/{id}/receipt
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /transactions
+- path: /debug/tracers
   method: post
+  operationId: postDebugTracers
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -120,8 +121,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /blocks/{revision}
-  method: get
+- path: /debug/storage-range
+  method: post
+  operationId: postDebugStorageRange
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -131,6 +133,7 @@ operations:
     audit: none
 - path: /logs/event
   method: post
+  operationId: postLogsEvent
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -146,6 +149,7 @@ operations:
     audit: required
 - path: /logs/transfer
   method: post
+  operationId: postLogsTransfer
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -163,6 +167,7 @@ operations:
     audit: required
 - path: /logs/events
   method: post
+  operationId: postLogsEvents
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -178,6 +183,7 @@ operations:
     audit: required
 - path: /logs/transfers
   method: post
+  operationId: postLogsTransfers
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -195,6 +201,7 @@ operations:
     audit: required
 - path: /events
   method: post
+  operationId: postEvents
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -210,6 +217,7 @@ operations:
     audit: required
 - path: /transfers
   method: post
+  operationId: postTransfers
   x-agentic-access:
     action-class: acting
     consequence: physical
@@ -227,6 +235,7 @@ operations:
     audit: required
 - path: /node/network/peers
   method: get
+  operationId: getNodeNetworkPeers
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -236,6 +245,7 @@ operations:
     audit: none
 - path: /node/consensus/committee
   method: get
+  operationId: getNodeConsensusCommittee
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -245,6 +255,7 @@ operations:
     audit: none
 - path: /staking/buckets
   method: get
+  operationId: getStakingBuckets
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -254,6 +265,7 @@ operations:
     audit: none
 - path: /staking/candidates
   method: get
+  operationId: getStakingCandidates
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -263,6 +275,7 @@ operations:
     audit: none
 - path: /staking/stakeholders
   method: get
+  operationId: getStakingStakeholders
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -272,6 +285,7 @@ operations:
     audit: none
 - path: /staking/delegates
   method: get
+  operationId: getStakingDelegates
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -281,6 +295,7 @@ operations:
     audit: none
 - path: /subscriptions/block
   method: get
+  operationId: getSubscriptionsBlock
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -290,6 +305,7 @@ operations:
     audit: none
 - path: /subscriptions/event
   method: get
+  operationId: getSubscriptionsEvent
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -299,6 +315,7 @@ operations:
     audit: none
 - path: /subscriptions/transfer
   method: get
+  operationId: getSubscriptionsTransfer
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -308,6 +325,7 @@ operations:
     audit: none
 - path: /subscriptions/beat
   method: get
+  operationId: getSubscriptionsBeat
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -315,23 +333,29 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /debug/tracers
-  method: post
+- path: /transactions/{id}
+  method: get
+  operationId: getTransactionsById
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /debug/storage-range
+      max-ttl: 3600
+    audit: none
+- path: /transactions/{id}/receipt
+  method: get
+  operationId: getTransactionsByIdReceipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /transactions
   method: post
+  operationId: postTransactions
   x-agentic-access:
     action-class: acting
     consequence: write
