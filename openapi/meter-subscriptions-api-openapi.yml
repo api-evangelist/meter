@@ -146,63 +146,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Event:
-      properties:
-        address:
-          type: string
-          description: the address of contract which produces the event (bytes20)
-          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
-        topics:
-          type: array
-          items:
-            type: string
-            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-        data:
-          type: string
-          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
-    Obsolete:
-      properties:
-        obsolete:
-          type: boolean
-          description: 'indicates whether the block containing this data become branch block
-
-            '
-    Beat:
-      properties:
-        number:
-          type: integer
-          format: uint32
-          description: block number (height)
-          example: 325324
-        id:
-          type: string
-          format: bytes32
-          description: block identifier
-          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
-        parentID:
-          type: string
-          format: bytes32
-          description: parent block ID
-          example: '0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d'
-        timestamp:
-          type: integer
-          format: uint64
-          description: block unix timestamp
-          example: 1533267900
-        bloom:
-          type: string
-          format: hex
-          description: 'the bloom filter composited with affected addresses
-
-            '
-          example: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-        k:
-          type: integer
-          format: uint32
-          description: 'the number of hash functions for bloom filter
-
-            '
-          example: 3
     LogMeta:
       description: event or transfer log meta info
       properties:
@@ -228,6 +171,20 @@ components:
           type: string
           description: transaction origin (signer)
           example: '0xdb4027477b2a8fe4c83c6dafe7f86678bb1b8a8d'
+    Event:
+      properties:
+        address:
+          type: string
+          description: the address of contract which produces the event (bytes20)
+          example: '0x7567d83b7b8d80addcb281a71d54fc7b3364ffed'
+        topics:
+          type: array
+          items:
+            type: string
+            example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
+        data:
+          type: string
+          example: '0x4de71f2d588aa8a1ea00fe8312d92966da424d9939a511fc0be81e65fad52af8'
     Block:
       properties:
         number:
@@ -317,6 +274,49 @@ components:
           type: string
           description: amount of tokens
           example: '0x47fdb3c3f456c0000'
+    Beat:
+      properties:
+        number:
+          type: integer
+          format: uint32
+          description: block number (height)
+          example: 325324
+        id:
+          type: string
+          format: bytes32
+          description: block identifier
+          example: '0x0004f6cc88bb4626a92907718e82f255b8fa511453a78e8797eb8cea3393b215'
+        parentID:
+          type: string
+          format: bytes32
+          description: parent block ID
+          example: '0x0004f6cb730dbd90fed09d165bfdf33cc0eed47ec068938f6ee7b7c12a4ea98d'
+        timestamp:
+          type: integer
+          format: uint64
+          description: block unix timestamp
+          example: 1533267900
+        bloom:
+          type: string
+          format: hex
+          description: 'the bloom filter composited with affected addresses
+
+            '
+          example: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+        k:
+          type: integer
+          format: uint32
+          description: 'the number of hash functions for bloom filter
+
+            '
+          example: 3
+    Obsolete:
+      properties:
+        obsolete:
+          type: boolean
+          description: 'indicates whether the block containing this data become branch block
+
+            '
   parameters:
     PositionInQuery:
       name: pos
